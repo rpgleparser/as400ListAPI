@@ -1,5 +1,5 @@
 package org.rplgleparser.api;
 
-public interface iERRC0100 {
+public interface IERRC0100 {
 
 }
