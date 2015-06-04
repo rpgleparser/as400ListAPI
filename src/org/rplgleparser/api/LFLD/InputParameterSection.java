@@ -6,6 +6,12 @@ import com.ibm.as400.access.AS400DataType;
 import com.ibm.as400.access.AS400Structure;
 import com.ibm.as400.access.AS400Text;
 
+/**
+ * A data transfer object with conversion capabilities from AS400 Byte[]. 
+ * This one implements the data format described in the QUSLFLD Input Parameter Section format.
+ * @author Eric N. Wilson
+ *
+ */
 public class InputParameterSection implements IInputParameterSection, FLDLoutputFormat, Serializable{
 	/**
 	 * 

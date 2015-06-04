@@ -7,6 +7,13 @@ import com.ibm.as400.access.AS400Bin4;
 import com.ibm.as400.access.AS400DataType;
 import com.ibm.as400.access.AS400Structure;
 
+/**
+ * A data transfer object with conversion capabilities from AS400 Byte[]. 
+ * This one implements the data format described in the QUSLFLD FLDL0200 format.
+ * @author Eric N. Wilson
+ *
+ */
+
 public class FLDL0200 extends FLDL0100 implements IFLDL0200, FLDLoutputFormat, Serializable {
 	/**
 	 * 

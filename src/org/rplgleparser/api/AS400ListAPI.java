@@ -15,7 +15,14 @@ import com.ibm.as400.access.ErrorCompletingRequestException;
 import com.ibm.as400.access.ObjectDoesNotExistException;
 import com.ibm.as400.access.ProgramCall;
 import com.ibm.as400.access.UserSpace;
-
+/**
+ * This class manages the movement through a user space, calling the user's function per entry. 
+ * <li> The user is responsible to call the iSeries API using the UserSpace that is created here
+ * <li> The user must also register the class that implements the ListApiCallback interface
+ * <li> If the user chooses to stop processing the list they should return false from the callback function  
+ * @author Eric N. Wilson
+ *
+ */
 public class AS400ListAPI implements ListApiProvider {
 
 	private class listenerEntry {

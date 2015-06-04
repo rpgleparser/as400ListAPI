@@ -17,6 +17,12 @@ import com.ibm.as400.access.ObjectDoesNotExistException;
 import com.ibm.as400.access.ProgramCall;
 import com.ibm.as400.access.ProgramParameter;
 
+/**
+ * This is the main workhorse class for calling the QUSLFLD API. Example of usage is
+ * in the main() method
+ * @author Eric N. Wilson
+ *
+ */
 public class QUSLFLD implements ListApiCallback {
 
 	public static void main(String[] args) {

@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import org.apache.commons.lang3.StringUtils;
 
 
+/**
+ * An example of how to extend the QUSLFLD class to do some arbitrary thing, in this case
+ * writing the basics of a DDS source member from the metadata returned.
+ * @author Eric N. Wilson
+ *
+ */
 public class ObjectListToArrayList extends QUSLFLD {
 	
 	private ArrayList<FLDLoutputFormat> theList = new ArrayList<FLDLoutputFormat>();

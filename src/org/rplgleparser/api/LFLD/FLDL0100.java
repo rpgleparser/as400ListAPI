@@ -9,6 +9,12 @@ import com.ibm.as400.access.AS400PackedDecimal;
 import com.ibm.as400.access.AS400Structure;
 import com.ibm.as400.access.AS400Text;
 
+/**
+ * A data transfer object with conversion capabilities from AS400 Byte[]. 
+ * This one implements the data format described in the QUSLFLD FLDL0100 format.
+ * @author Eric N. Wilson
+ *
+ */
 public class FLDL0100 implements IFLDL0100, FLDLoutputFormat, Serializable {
 	/**
 	 * 

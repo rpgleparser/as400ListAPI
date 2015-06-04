@@ -2,6 +2,12 @@ package org.rplgleparser.api.LFLD;
 
 import java.math.BigDecimal;
 
+/**
+ * Public interface of classes that implement the IBM QUSLFLD FLDL0100 interface. 
+ * Allows read only access to all the data type values.
+ * @author Eric N. Wilson
+ *
+ */
 public interface IFLDL0100 {
 	/**
 	 * @return the fieldName

@@ -7,6 +7,12 @@ import com.ibm.as400.access.AS400DataType;
 import com.ibm.as400.access.AS400Structure;
 import com.ibm.as400.access.AS400Text;
 
+/**
+ * Implementation class for the header section of the QUSLFLD api. Currently not used 
+ * in the main code but provided so you can take a byte[] from the user space and get the data
+ * @author Eric N. Wilson
+ *
+ */
 public class HeaderSection implements IHeaderSection, FLDLoutputFormat, Serializable {
 	/**
 	 * 
