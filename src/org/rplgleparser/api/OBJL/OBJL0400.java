@@ -7,6 +7,12 @@ import com.ibm.as400.access.AS400DataType;
 import com.ibm.as400.access.AS400Structure;
 import com.ibm.as400.access.AS400Text;
 
+/**
+ * A data transfer object with conversion capabilities from AS400 Byte[]. 
+ * This one implements the data format described in the QUSLOBJ OBJL0400 format.
+ * @author Eric N. Wilson
+ *
+ */
 public class OBJL0400 extends OBJL0300 implements IOBJL0400, OBJLoutputFormat, Serializable{
 	private static final long serialVersionUID = -7803755660096246332L;
 
@@ -190,12 +196,138 @@ public class OBJL0400 extends OBJL0300 implements IOBJL0400, OBJLoutputFormat, S
 	}
 	
 	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		OBJL0400 other = (OBJL0400) obj;
+		if (PrimaryAssociatedSpaceSize == null) {
+			if (other.PrimaryAssociatedSpaceSize != null)
+				return false;
+		} else if (!PrimaryAssociatedSpaceSize
+				.equals(other.PrimaryAssociatedSpaceSize))
+			return false;
+		if (authorizedProgramAnalysisReport == null) {
+			if (other.authorizedProgramAnalysisReport != null)
+				return false;
+		} else if (!authorizedProgramAnalysisReport
+				.equals(other.authorizedProgramAnalysisReport))
+			return false;
+		if (compiler == null) {
+			if (other.compiler != null)
+				return false;
+		} else if (!compiler.equals(other.compiler))
+			return false;
+		if (creatorUserProfile == null) {
+			if (other.creatorUserProfile != null)
+				return false;
+		} else if (!creatorUserProfile.equals(other.creatorUserProfile))
+			return false;
+		if (licensedProgram == null) {
+			if (other.licensedProgram != null)
+				return false;
+		} else if (!licensedProgram.equals(other.licensedProgram))
+			return false;
+		if (objectLevel == null) {
+			if (other.objectLevel != null)
+				return false;
+		} else if (!objectLevel.equals(other.objectLevel))
+			return false;
+		if (optimumSpaceAlignment == null) {
+			if (other.optimumSpaceAlignment != null)
+				return false;
+		} else if (!optimumSpaceAlignment.equals(other.optimumSpaceAlignment))
+			return false;
+		if (primaryGroup == null) {
+			if (other.primaryGroup != null)
+				return false;
+		} else if (!primaryGroup.equals(other.primaryGroup))
+			return false;
+		if (programTemporaryFix == null) {
+			if (other.programTemporaryFix != null)
+				return false;
+		} else if (!programTemporaryFix.equals(other.programTemporaryFix))
+			return false;
+		if (reservedOBJL0400 == null) {
+			if (other.reservedOBJL0400 != null)
+				return false;
+		} else if (!reservedOBJL0400.equals(other.reservedOBJL0400))
+			return false;
+		if (reservedOBJL04002 == null) {
+			if (other.reservedOBJL04002 != null)
+				return false;
+		} else if (!reservedOBJL04002.equals(other.reservedOBJL04002))
+			return false;
+		if (sourceFileLibraryName == null) {
+			if (other.sourceFileLibraryName != null)
+				return false;
+		} else if (!sourceFileLibraryName.equals(other.sourceFileLibraryName))
+			return false;
+		if (sourceFileMemberName == null) {
+			if (other.sourceFileMemberName != null)
+				return false;
+		} else if (!sourceFileMemberName.equals(other.sourceFileMemberName))
+			return false;
+		if (sourceFileName == null) {
+			if (other.sourceFileName != null)
+				return false;
+		} else if (!sourceFileName.equals(other.sourceFileName))
+			return false;
+		if (sourceFileUpdatedDateAndTime == null) {
+			if (other.sourceFileUpdatedDateAndTime != null)
+				return false;
+		} else if (!sourceFileUpdatedDateAndTime
+				.equals(other.sourceFileUpdatedDateAndTime))
+			return false;
+		if (systemLevel == null) {
+			if (other.systemLevel != null)
+				return false;
+		} else if (!systemLevel.equals(other.systemLevel))
+			return false;
+		if (systemWhereObjectWasCreated == null) {
+			if (other.systemWhereObjectWasCreated != null)
+				return false;
+		} else if (!systemWhereObjectWasCreated
+				.equals(other.systemWhereObjectWasCreated))
+			return false;
+		if (userChanged == null) {
+			if (other.userChanged != null)
+				return false;
+		} else if (!userChanged.equals(other.userChanged))
+			return false;
+		return true;
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T extends OBJLoutputFormat> T fromByteArray(byte[] input) {
 		return ((T) new OBJL0400(input));
 	}
-	
+
+	public String getAuthorizedProgramAnalysisReport() {
+		return authorizedProgramAnalysisReport;
+	}
+
+	public String getCompiler() {
+		return compiler;
+	}
+
+	public String getCreatorUserProfile() {
+		return creatorUserProfile;
+	}
+
+	public String getLicensedProgram() {
+		return licensedProgram;
+	}
+
+	public String getObjectLevel() {
+		return objectLevel;
+	}
+
 	public IOBJL0300 getOBJL0300() {
 		OBJL0300 result = new OBJL0300();
 		result.ObjectNameUsed = ObjectNameUsed;
@@ -228,6 +360,30 @@ public class OBJL0400 extends OBJL0300 implements IOBJL0400, OBJLoutputFormat, S
 		return result;
 	}
 
+	public String getOptimumSpaceAlignment() {
+		return optimumSpaceAlignment;
+	}
+
+	public Integer getPrimaryAssociatedSpaceSize() {
+		return PrimaryAssociatedSpaceSize;
+	}
+
+	public String getPrimaryGroup() {
+		return primaryGroup;
+	}
+
+	public String getProgramTemporaryFix() {
+		return programTemporaryFix;
+	}
+
+	public String getReservedOBJL0400() {
+		return reservedOBJL0400;
+	}
+
+	public String getReservedOBJL04002() {
+		return reservedOBJL04002;
+	}
+
 	public String getSourceFileLibraryName() {
 		return sourceFileLibraryName;
 	}
@@ -244,67 +400,22 @@ public class OBJL0400 extends OBJL0300 implements IOBJL0400, OBJLoutputFormat, S
 		return sourceFileUpdatedDateAndTime;
 	}
 
-	public String getCreatorUserProfile() {
-		return creatorUserProfile;
+	public String getSystemLevel() {
+		return systemLevel;
 	}
 
 	public String getSystemWhereObjectWasCreated() {
 		return systemWhereObjectWasCreated;
 	}
 
-	public String getSystemLevel() {
-		return systemLevel;
-	}
-
-	public String getCompiler() {
-		return compiler;
-	}
-
-	public String getObjectLevel() {
-		return objectLevel;
-	}
-
 	public String getUserChanged() {
 		return userChanged;
-	}
-
-	public String getLicensedProgram() {
-		return licensedProgram;
-	}
-
-	public String getProgramTemporaryFix() {
-		return programTemporaryFix;
-	}
-
-	public String getAuthorizedProgramAnalysisReport() {
-		return authorizedProgramAnalysisReport;
-	}
-
-	public String getPrimaryGroup() {
-		return primaryGroup;
-	}
-
-	public String getReservedOBJL0400() {
-		return reservedOBJL0400;
-	}
-
-	public String getOptimumSpaceAlignment() {
-		return optimumSpaceAlignment;
-	}
-
-	public Integer getPrimaryAssociatedSpaceSize() {
-		return PrimaryAssociatedSpaceSize;
-	}
-
-	public String getReservedOBJL04002() {
-		return reservedOBJL04002;
 	}
 
 	@Override
 	public int hashCode() {
 		return toString().hashCode();
 	}
-
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();

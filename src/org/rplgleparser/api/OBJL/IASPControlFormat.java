@@ -1,6 +1,10 @@
 package org.rplgleparser.api.OBJL;
 
-
+/**
+ * Use this interface when working with the ASP Control Format of the QUSLOBJ API
+ * @author Eric N. Wilson
+ *
+ */
 public interface IASPControlFormat {
 	/**
 	 * @return the lengthOfASPControlFormat

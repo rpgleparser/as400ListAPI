@@ -6,6 +6,12 @@ import com.ibm.as400.access.AS400Bin4;
 import com.ibm.as400.access.AS400DataType;
 import com.ibm.as400.access.AS400Structure;
 
+/**
+ * Implementation class for the Authority Control Format of the QUSLOBJ API. Currently not used 
+ * in the main code but provided so you can take a byte[] from the user space and get the data
+ * @author Eric N. Wilson
+ *
+ */
 public class AuthorityControlFormat implements IAuthorityControlFormat, OBJLoutputFormat, Serializable{
 	private static final long serialVersionUID = 2563546748840116787L;
 	//
@@ -74,37 +80,108 @@ public class AuthorityControlFormat implements IAuthorityControlFormat, OBJLoutp
 		reservedAuthControlFormat = (Integer)o[6]; 
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		AuthorityControlFormat other = (AuthorityControlFormat) obj;
+		if (callLevel == null) {
+			if (other.callLevel != null)
+				return false;
+		} else if (!callLevel.equals(other.callLevel))
+			return false;
+		if (displacementToLibraryAuthorities == null) {
+			if (other.displacementToLibraryAuthorities != null)
+				return false;
+		} else if (!displacementToLibraryAuthorities
+				.equals(other.displacementToLibraryAuthorities))
+			return false;
+		if (displacementToObjectAuthorities == null) {
+			if (other.displacementToObjectAuthorities != null)
+				return false;
+		} else if (!displacementToObjectAuthorities
+				.equals(other.displacementToObjectAuthorities))
+			return false;
+		if (lengthOfAuthorityControlFormat == null) {
+			if (other.lengthOfAuthorityControlFormat != null)
+				return false;
+		} else if (!lengthOfAuthorityControlFormat
+				.equals(other.lengthOfAuthorityControlFormat))
+			return false;
+		if (numberOfLibraryAuthorities == null) {
+			if (other.numberOfLibraryAuthorities != null)
+				return false;
+		} else if (!numberOfLibraryAuthorities
+				.equals(other.numberOfLibraryAuthorities))
+			return false;
+		if (numberOfObjectAuthorities == null) {
+			if (other.numberOfObjectAuthorities != null)
+				return false;
+		} else if (!numberOfObjectAuthorities
+				.equals(other.numberOfObjectAuthorities))
+			return false;
+		if (reservedAuthControlFormat == null) {
+			if (other.reservedAuthControlFormat != null)
+				return false;
+		} else if (!reservedAuthControlFormat
+				.equals(other.reservedAuthControlFormat))
+			return false;
+		return true;
+	}
+
 	@SuppressWarnings("unchecked")
 	public <T extends OBJLoutputFormat> T fromByteArray(byte[] input) {
 		return ((T) new AuthorityControlFormat(input));
-	}
-
-	public Integer getLengthOfAuthorityControlFormat() {
-		return lengthOfAuthorityControlFormat;
 	}
 
 	public Integer getCallLevel() {
 		return callLevel;
 	}
 
+	public Integer getDisplacementToLibraryAuthorities() {
+		return displacementToLibraryAuthorities;
+	}
+
 	public Integer getDisplacementToObjectAuthorities() {
 		return displacementToObjectAuthorities;
 	}
 
-	public Integer getNumberOfObjectAuthorities() {
-		return numberOfObjectAuthorities;
-	}
-
-	public Integer getDisplacementToLibraryAuthorities() {
-		return displacementToLibraryAuthorities;
+	public Integer getLengthOfAuthorityControlFormat() {
+		return lengthOfAuthorityControlFormat;
 	}
 
 	public Integer getNumberOfLibraryAuthorities() {
 		return numberOfLibraryAuthorities;
 	}
 
+	public Integer getNumberOfObjectAuthorities() {
+		return numberOfObjectAuthorities;
+	}
+
 	public Integer getReservedAuthControlFormat() {
 		return reservedAuthControlFormat;
+	}
+
+	@Override
+	public int hashCode() {
+		return toString().hashCode();
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Length of Authority Control Format: " + lengthOfAuthorityControlFormat.toString());
+		sb.append("Call Level: " + callLevel.toString());
+		sb.append("Displacement to Object Authorities: "+ displacementToObjectAuthorities.toString());
+		sb.append("Number of Object Authorities: "+ numberOfObjectAuthorities.toString());
+		sb.append("Displacement to Library Authorities: "+ displacementToLibraryAuthorities.toString()); 
+		sb.append("Number of Library Authorities: "+numberOfLibraryAuthorities.toString());
+		sb.append("Reserved (Authority Control Format): "+ reservedAuthControlFormat.toString());
+		return sb.toString();
 	}
 
 }

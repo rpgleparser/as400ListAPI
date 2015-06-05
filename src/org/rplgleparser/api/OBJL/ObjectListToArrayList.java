@@ -2,6 +2,13 @@ package org.rplgleparser.api.OBJL;
 
 import java.util.ArrayList;
 
+/**
+ * This class serves as a trivial example of how to extend the QUSLRCD class and use the
+ * data for a given purpose. Here we have tried to keep it simple and just stick the entries
+ * into an ArrayList
+ * @author Eric N. Wilson
+ *
+ */
 public class ObjectListToArrayList extends QUSLOBJ  {
 	public static void main(String[] args){
 		ObjectListToArrayList myobj = new ObjectListToArrayList();

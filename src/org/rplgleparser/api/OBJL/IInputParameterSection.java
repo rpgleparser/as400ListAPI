@@ -1,6 +1,10 @@
 package org.rplgleparser.api.OBJL;
 
-
+/**
+ * Use this interface when working with the Input Parameter Section of the QUSLOBJ API
+ * @author Eric N. Wilson
+ *
+ */
 public interface IInputParameterSection {
 	/**
 	 * @return the userSpaceName

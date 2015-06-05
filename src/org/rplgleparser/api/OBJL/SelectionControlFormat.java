@@ -4,6 +4,12 @@ import com.ibm.as400.access.AS400Bin4;
 import com.ibm.as400.access.AS400DataType;
 import com.ibm.as400.access.AS400Structure;
 
+/**
+ * Implementation class for the Selection Control Format of the QUSLOBJ API. Currently not used 
+ * in the main code but provided so you can take a byte[] from the user space and get the data
+ * @author Eric N. Wilson
+ *
+ */
 public class SelectionControlFormat implements ISelectionControlFormat, OBJLoutputFormat {
 	// Selection Control Format
 	//
@@ -63,21 +69,57 @@ public class SelectionControlFormat implements ISelectionControlFormat, OBJLoutp
 		reservedSelectionControlFormat = (Integer)o[0];
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SelectionControlFormat other = (SelectionControlFormat) obj;
+		if (displacementToStatuses == null) {
+			if (other.displacementToStatuses != null)
+				return false;
+		} else if (!displacementToStatuses.equals(other.displacementToStatuses))
+			return false;
+		if (lengthOfSelectionControlFormat == null) {
+			if (other.lengthOfSelectionControlFormat != null)
+				return false;
+		} else if (!lengthOfSelectionControlFormat
+				.equals(other.lengthOfSelectionControlFormat))
+			return false;
+		if (numberOfStatuses == null) {
+			if (other.numberOfStatuses != null)
+				return false;
+		} else if (!numberOfStatuses.equals(other.numberOfStatuses))
+			return false;
+		if (reservedSelectionControlFormat == null) {
+			if (other.reservedSelectionControlFormat != null)
+				return false;
+		} else if (!reservedSelectionControlFormat
+				.equals(other.reservedSelectionControlFormat))
+			return false;
+		if (selectOrOmitStatusValue == null) {
+			if (other.selectOrOmitStatusValue != null)
+				return false;
+		} else if (!selectOrOmitStatusValue
+				.equals(other.selectOrOmitStatusValue))
+			return false;
+		return true;
+	}
+
 	@SuppressWarnings("unchecked")
 	public <T extends OBJLoutputFormat> T fromByteArray(byte[] input) {
 		return ((T) new SelectionControlFormat(input));
 	}
 
-	public Integer getLengthOfSelectionControlFormat() {
-		return lengthOfSelectionControlFormat;
-	}
-
-	public Integer getSelectOrOmitStatusValue() {
-		return selectOrOmitStatusValue;
-	}
-
 	public Integer getDisplacementToStatuses() {
 		return displacementToStatuses;
+	}
+
+	public Integer getLengthOfSelectionControlFormat() {
+		return lengthOfSelectionControlFormat;
 	}
 
 	public Integer getNumberOfStatuses() {
@@ -86,6 +128,26 @@ public class SelectionControlFormat implements ISelectionControlFormat, OBJLoutp
 
 	public Integer getReservedSelectionControlFormat() {
 		return reservedSelectionControlFormat;
+	}
+
+	public Integer getSelectOrOmitStatusValue() {
+		return selectOrOmitStatusValue;
+	}
+
+	@Override
+	public int hashCode() {
+		return toString().hashCode();
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(" Length of Selection Control Format: " + lengthOfSelectionControlFormat.toString()); 
+		sb.append(" Select or Omit Status Value: " + selectOrOmitStatusValue.toString());
+		sb.append(" Displacement To Statuses: " + displacementToStatuses.toString());
+		sb.append(" Number of Statuses: " + numberOfStatuses.toString());
+		sb.append(" Reserved (Selection Control Format): " + reservedSelectionControlFormat.toString());
+		return sb.toString();
 	}
 
 

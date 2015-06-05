@@ -15,9 +15,6 @@ import com.ibm.as400.access.AS400Structure;
  */
 
 public class FLDL0200 extends FLDL0100 implements IFLDL0200, FLDLoutputFormat, Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2857415563833218986L;
 
 	//
@@ -144,6 +141,34 @@ public class FLDL0200 extends FLDL0100 implements IFLDL0200, FLDLoutputFormat, S
 	}
 	
 	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		FLDL0200 other = (FLDL0200) obj;
+		if (displacementToDefaultValue == null) {
+			if (other.displacementToDefaultValue != null)
+				return false;
+		} else if (!displacementToDefaultValue
+				.equals(other.displacementToDefaultValue))
+			return false;
+		if (lengthOfDefaultValue == null) {
+			if (other.lengthOfDefaultValue != null)
+				return false;
+		} else if (!lengthOfDefaultValue.equals(other.lengthOfDefaultValue))
+			return false;
+		if (lengthOfFLDL0200Format == null) {
+			if (other.lengthOfFLDL0200Format != null)
+				return false;
+		} else if (!lengthOfFLDL0200Format.equals(other.lengthOfFLDL0200Format))
+			return false;
+		return true;
+	}
+	@SuppressWarnings("unchecked")
+	@Override
 	public <T extends FLDLoutputFormat> T fromByteArray(byte[] input) {
 		// TODO Auto-generated method stub
 		return ((T) new FLDL0200(input));
@@ -154,6 +179,7 @@ public class FLDL0200 extends FLDL0100 implements IFLDL0200, FLDLoutputFormat, S
 	public Integer getDisplacementToDefaultValue() {
 		return displacementToDefaultValue;
 	}
+
 	/**
 	 * @return the lengthOfDefaultValue
 	 */
@@ -170,7 +196,6 @@ public class FLDL0200 extends FLDL0100 implements IFLDL0200, FLDLoutputFormat, S
 
 	@Override
 	public int hashCode() {
-		// TODO Auto-generated method stub
 		return toString().hashCode();
 	}
 

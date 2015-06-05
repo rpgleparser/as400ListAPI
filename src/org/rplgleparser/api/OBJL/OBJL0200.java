@@ -6,6 +6,12 @@ import com.ibm.as400.access.AS400DataType;
 import com.ibm.as400.access.AS400Structure;
 import com.ibm.as400.access.AS400Text;
 
+/**
+ * A data transfer object with conversion capabilities from AS400 Byte[]. 
+ * This one implements the data format described in the QUSLOBJ OBJL0200 format.
+ * @author Eric N. Wilson
+ *
+ */
 public class OBJL0200 extends OBJL0100 implements IOBJL0200, OBJLoutputFormat, Serializable{
 
 	private static final long serialVersionUID = 4298231844551639933L;
@@ -66,6 +72,72 @@ public class OBJL0200 extends OBJL0100 implements IOBJL0200, OBJLoutputFormat, S
 	}
 
 	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		OBJL0200 other = (OBJL0200) obj;
+		if (ExtendedObjectAttribute == null) {
+			if (other.ExtendedObjectAttribute != null)
+				return false;
+		} else if (!ExtendedObjectAttribute
+				.equals(other.ExtendedObjectAttribute))
+			return false;
+		if (InformationStatus == null) {
+			if (other.InformationStatus != null)
+				return false;
+		} else if (!InformationStatus.equals(other.InformationStatus))
+			return false;
+		if (ObjectNameUsed == null) {
+			if (other.ObjectNameUsed != null)
+				return false;
+		} else if (!ObjectNameUsed.equals(other.ObjectNameUsed))
+			return false;
+		if (ObjectTypeUsed == null) {
+			if (other.ObjectTypeUsed != null)
+				return false;
+		} else if (!ObjectTypeUsed.equals(other.ObjectTypeUsed))
+			return false;
+		if (TextDescription == null) {
+			if (other.TextDescription != null)
+				return false;
+		} else if (!TextDescription.equals(other.TextDescription))
+			return false;
+		if (UserDefinedAttribute == null) {
+			if (other.UserDefinedAttribute != null)
+				return false;
+		} else if (!UserDefinedAttribute.equals(other.UserDefinedAttribute))
+			return false;
+		if (objectLibraryNameUsed == null) {
+			if (other.objectLibraryNameUsed != null)
+				return false;
+		} else if (!objectLibraryNameUsed.equals(other.objectLibraryNameUsed))
+			return false;
+		if (reservedOBJL0200 == null) {
+			if (other.reservedOBJL0200 != null)
+				return false;
+		} else if (!reservedOBJL0200.equals(other.reservedOBJL0200))
+			return false;
+		return true;
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T extends OBJLoutputFormat> T fromByteArray(byte[] input) {
+		return ((T) new OBJL0200(input));
+	}
+
+	public String getExtendedObjectAttribute() {
+		return ExtendedObjectAttribute;
+	}
+
+	public String getInformationStatus() {
+		return InformationStatus;
+	}
+
+	@Override
 	public String getObjectLibraryNameUsed() {
 		return objectLibraryNameUsed;
 	}
@@ -80,11 +152,6 @@ public class OBJL0200 extends OBJL0100 implements IOBJL0200, OBJLoutputFormat, S
 		return ObjectTypeUsed;
 	}
 
-	@SuppressWarnings("unchecked")
-	public <T extends OBJLoutputFormat> T fromByteArray(byte[] input) {
-		return ((T) new OBJL0200(input));
-	}
-
 	public IOBJL0100 getOBJL0100() {
 		OBJL0100 result = new OBJL0100();
 		result.ObjectNameUsed = ObjectNameUsed;
@@ -93,30 +160,21 @@ public class OBJL0200 extends OBJL0100 implements IOBJL0200, OBJLoutputFormat, S
 		return result;
 	}
 
-	public String getInformationStatus() {
-		return InformationStatus;
-	}
-
-	public String getExtendedObjectAttribute() {
-		return ExtendedObjectAttribute;
+	public String getReservedOBJL0200() {
+		return reservedOBJL0200;
 	}
 
 	public String getTextDescription() {
 		return TextDescription;
 	}
-
 	public String getUserDefinedAttribute() {
 		return UserDefinedAttribute;
 	}
 
-	public String getReservedOBJL0200() {
-		return reservedOBJL0200;
-	}
 	@Override
 	public int hashCode() {
 		return toString().hashCode();
 	}
-
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();

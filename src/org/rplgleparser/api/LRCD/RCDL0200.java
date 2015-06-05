@@ -7,10 +7,13 @@ import com.ibm.as400.access.AS400DataType;
 import com.ibm.as400.access.AS400Structure;
 import com.ibm.as400.access.AS400Text;
 
+/**
+ * A data transfer object with conversion capabilities from AS400 Byte[]. 
+ * This one implements the data format described in the QUSLRCD RCDL0200 format.
+ * @author Eric N. Wilson
+ *
+ */
 public class RCDL0200 extends RCDL0100 implements IRCDL0200, RCDLoutputFormat, Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 942181025236716095L;
 	// RCDL0200 List Data Section
 	//
@@ -19,22 +22,22 @@ public class RCDL0200 extends RCDL0100 implements IRCDL0200, RCDLoutputFormat, S
 	// 0 0 CHAR(10) Record format name
 	// Use the field above
 	// 10 A CHAR(13) Record format ID
-	protected AS400Text recordFormatIDx = new AS400Text(13);
+	protected transient AS400Text recordFormatIDx = new AS400Text(13);
 	// 23 17 CHAR(1) Reserved
-	protected AS400Text reservedRCDL02001x = new AS400Text(1);
+	protected transient AS400Text reservedRCDL02001x = new AS400Text(1);
 
 	// 24 18 BINARY(4) Record length
-	protected AS400Bin4 recordLengthx = new AS400Bin4();
+	protected transient AS400Bin4 recordLengthx = new AS400Bin4();
 	// 28 1C BINARY(4) Number of fields
-	protected AS400Bin4 numberOfFieldsx = new AS400Bin4();
+	protected transient AS400Bin4 numberOfFieldsx = new AS400Bin4();
 	// 32 20 CHAR(50) Record text description
-	protected AS400Text recordTextDescriptionx = new AS400Text(50);
+	protected transient AS400Text recordTextDescriptionx = new AS400Text(50);
 	// 82 52 CHAR(2) Reserved
-	protected AS400Text reservedRCDL02002x = new AS400Text(2);
+	protected transient AS400Text reservedRCDL02002x = new AS400Text(2);
 	// 84 54 BINARY(4) Record text description CCSID
-	protected AS400Bin4 recordTextDescriptionCCSIDx = new AS400Bin4();
+	protected transient AS400Bin4 recordTextDescriptionCCSIDx = new AS400Bin4();
 	
-	protected AS400DataType[] RCDL0200a = new AS400DataType[] { 
+	protected transient AS400DataType[] RCDL0200a = new AS400DataType[] { 
 			recordFormatNamex,
 			recordFormatIDx, 
 			reservedRCDL02001x, 
@@ -44,7 +47,8 @@ public class RCDL0200 extends RCDL0100 implements IRCDL0200, RCDLoutputFormat, S
 			reservedRCDL02002x,
 			recordTextDescriptionCCSIDx 
 			};
-	protected AS400Structure RCDL0200x = new AS400Structure(RCDL0200a);
+	protected transient AS400Structure RCDL0200x = new AS400Structure(RCDL0200a);
+	
 	protected Integer recordTextDescriptionCCSID;
 	protected String reservedRCDL02002;
 	protected String recordTextDescription;
@@ -53,6 +57,7 @@ public class RCDL0200 extends RCDL0100 implements IRCDL0200, RCDLoutputFormat, S
 	protected String reservedRCDL02001;
 	protected String recordFormatID;
 	protected String recordFormatName;
+	
 	public RCDL0200(){
 		// Default Constructor
 	}
@@ -68,6 +73,7 @@ public class RCDL0200 extends RCDL0100 implements IRCDL0200, RCDLoutputFormat, S
 		recordTextDescriptionCCSID = (Integer)o[7];
 		
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public <T extends RCDLoutputFormat> T fromByteArray(byte[] input) {
 		return ((T) new RCDL0200(input));
@@ -134,5 +140,57 @@ public class RCDL0200 extends RCDL0100 implements IRCDL0200, RCDLoutputFormat, S
 		sb.append(" Record Text Description CCSID: " + recordTextDescriptionCCSID.toString()); 
 
 		return sb.toString();
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		RCDL0200 other = (RCDL0200) obj;
+		if (numberOfFields == null) {
+			if (other.numberOfFields != null)
+				return false;
+		} else if (!numberOfFields.equals(other.numberOfFields))
+			return false;
+		if (recordFormatID == null) {
+			if (other.recordFormatID != null)
+				return false;
+		} else if (!recordFormatID.equals(other.recordFormatID))
+			return false;
+		if (recordFormatName == null) {
+			if (other.recordFormatName != null)
+				return false;
+		} else if (!recordFormatName.equals(other.recordFormatName))
+			return false;
+		if (recordLength == null) {
+			if (other.recordLength != null)
+				return false;
+		} else if (!recordLength.equals(other.recordLength))
+			return false;
+		if (recordTextDescription == null) {
+			if (other.recordTextDescription != null)
+				return false;
+		} else if (!recordTextDescription.equals(other.recordTextDescription))
+			return false;
+		if (recordTextDescriptionCCSID == null) {
+			if (other.recordTextDescriptionCCSID != null)
+				return false;
+		} else if (!recordTextDescriptionCCSID
+				.equals(other.recordTextDescriptionCCSID))
+			return false;
+		if (reservedRCDL02001 == null) {
+			if (other.reservedRCDL02001 != null)
+				return false;
+		} else if (!reservedRCDL02001.equals(other.reservedRCDL02001))
+			return false;
+		if (reservedRCDL02002 == null) {
+			if (other.reservedRCDL02002 != null)
+				return false;
+		} else if (!reservedRCDL02002.equals(other.reservedRCDL02002))
+			return false;
+		return true;
 	}
 }

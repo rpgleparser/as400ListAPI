@@ -17,41 +17,41 @@ public class HeaderSection implements IHeaderSection, FLDLoutputFormat, Serializ
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1555175653749243967L;
+	protected static final long serialVersionUID = 1555175653749243967L;
 
 	// Header Section
 	//
 	// Offset Type Field
 	// Dec Hex
 	// 0 0 CHAR(10) File name used
-	AS400Text fileNameUsedx = new AS400Text(10);
+	protected transient AS400Text fileNameUsedx = new AS400Text(10);
 
 	// 10 A CHAR(10) File library name used
-	AS400Text fileLibraryNameUsedx = new AS400Text(10);
+	protected transient AS400Text fileLibraryNameUsedx = new AS400Text(10);
 
 	// 20 14 CHAR(10) File type
-	AS400Text fileTypex = new AS400Text(10);
+	protected transient AS400Text fileTypex = new AS400Text(10);
 	// 30 1E CHAR(10) Record format name used
-	AS400Text recordFormatNameUsedx = new AS400Text(10);
+	protected transient AS400Text recordFormatNameUsedx = new AS400Text(10);
 	// 40 28 BINARY(4) Record length
-	AS400Bin4 recordLengthx = new AS400Bin4();
+	protected transient AS400Bin4 recordLengthx = new AS400Bin4();
 	// 44 2C CHAR(13) Record format ID
-	AS400Text recordFormatIDx = new AS400Text(13);
+	protected transient AS400Text recordFormatIDx = new AS400Text(13);
 	// 57 39 CHAR(50) Record text description
-	AS400Text recordTextDescriptionx = new AS400Text(50);
+	protected transient AS400Text recordTextDescriptionx = new AS400Text(50);
 	// 107 6B CHAR(1) Reserved
-	AS400Text reservedHeaderSectionx = new AS400Text(1);
+	protected transient AS400Text reservedHeaderSectionx = new AS400Text(1);
 	// 108 6C BINARY(4) Record text description CCSID
-	AS400Bin4 recordTextDescriptionCCSIDx = new AS400Bin4();
+	protected transient AS400Bin4 recordTextDescriptionCCSIDx = new AS400Bin4();
 	// 112 70 CHAR(1) Variable length fields in format indicator
-	AS400Text variableLengthFieldsInFormatIndicatorx = new AS400Text(1);
+	protected transient AS400Text variableLengthFieldsInFormatIndicatorx = new AS400Text(1);
 	// 113 71 CHAR(1) Graphic fields indicator
-	AS400Text graphicFieldsIndicatorx = new AS400Text(1);
+	protected transient AS400Text graphicFieldsIndicatorx = new AS400Text(1);
 	// 114 72 CHAR(1) Date and time fields indicator
-	AS400Text dateAndTimeFieldsIndicatorx = new AS400Text(1);
+	protected transient AS400Text dateAndTimeFieldsIndicatorx = new AS400Text(1);
 	// 115 73 CHAR(1) Null-capable fields indicator
-	AS400Text nullCapableFieldsIndicatorx = new AS400Text(1);
-	AS400DataType[] headerSectiona = new AS400DataType[] { 
+	protected transient AS400Text nullCapableFieldsIndicatorx = new AS400Text(1);
+	protected transient AS400DataType[] headerSectiona = new AS400DataType[] { 
 			fileNameUsedx,
 			fileLibraryNameUsedx, 
 			fileTypex, 
@@ -66,33 +66,33 @@ public class HeaderSection implements IHeaderSection, FLDLoutputFormat, Serializ
 			dateAndTimeFieldsIndicatorx,
 			nullCapableFieldsIndicatorx 
 			};
-	AS400Structure headerSectionx = new AS400Structure(headerSectiona);
+	protected transient AS400Structure headerSectionx = new AS400Structure(headerSectiona);
 
-	private String fileNameUsed;
+	protected String fileNameUsed;
 
-	private String fileLibraryNameUsed;
+	protected String fileLibraryNameUsed;
 
-	private String fileType;
+	protected String fileType;
 
-	private String recordFormatNameUsed;
+	protected String recordFormatNameUsed;
 
-	private Integer recordLength;
+	protected Integer recordLength;
 
-	private String recordFormatID;
+	protected String recordFormatID;
 
-	private String recordTextDescription;
+	protected String recordTextDescription;
 
-	private String reservedHeaderSection;
+	protected String reservedHeaderSection;
 
-	private Integer recordTextDescriptionCCSID;
+	protected Integer recordTextDescriptionCCSID;
 
-	private String variableLengthFieldsInFormatIndicator;
+	protected String variableLengthFieldsInFormatIndicator;
 
-	private String graphicFieldsIndicator;
+	protected String graphicFieldsIndicator;
 
-	private String dateAndTimeFieldsIndicator;
+	protected String dateAndTimeFieldsIndicator;
 
-	private String nullCapableFieldsIndicator;
+	protected String nullCapableFieldsIndicator;
 	
 	public HeaderSection(){
 		// Default constructor	
@@ -113,6 +113,87 @@ public class HeaderSection implements IHeaderSection, FLDLoutputFormat, Serializ
 		graphicFieldsIndicator= (String)o[10]; 
 		dateAndTimeFieldsIndicator= (String)o[11];
 		nullCapableFieldsIndicator= (String)o[12];
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		HeaderSection other = (HeaderSection) obj;
+		if (dateAndTimeFieldsIndicator == null) {
+			if (other.dateAndTimeFieldsIndicator != null)
+				return false;
+		} else if (!dateAndTimeFieldsIndicator
+				.equals(other.dateAndTimeFieldsIndicator))
+			return false;
+		if (fileLibraryNameUsed == null) {
+			if (other.fileLibraryNameUsed != null)
+				return false;
+		} else if (!fileLibraryNameUsed.equals(other.fileLibraryNameUsed))
+			return false;
+		if (fileNameUsed == null) {
+			if (other.fileNameUsed != null)
+				return false;
+		} else if (!fileNameUsed.equals(other.fileNameUsed))
+			return false;
+		if (fileType == null) {
+			if (other.fileType != null)
+				return false;
+		} else if (!fileType.equals(other.fileType))
+			return false;
+		if (graphicFieldsIndicator == null) {
+			if (other.graphicFieldsIndicator != null)
+				return false;
+		} else if (!graphicFieldsIndicator.equals(other.graphicFieldsIndicator))
+			return false;
+		if (nullCapableFieldsIndicator == null) {
+			if (other.nullCapableFieldsIndicator != null)
+				return false;
+		} else if (!nullCapableFieldsIndicator
+				.equals(other.nullCapableFieldsIndicator))
+			return false;
+		if (recordFormatID == null) {
+			if (other.recordFormatID != null)
+				return false;
+		} else if (!recordFormatID.equals(other.recordFormatID))
+			return false;
+		if (recordFormatNameUsed == null) {
+			if (other.recordFormatNameUsed != null)
+				return false;
+		} else if (!recordFormatNameUsed.equals(other.recordFormatNameUsed))
+			return false;
+		if (recordLength == null) {
+			if (other.recordLength != null)
+				return false;
+		} else if (!recordLength.equals(other.recordLength))
+			return false;
+		if (recordTextDescription == null) {
+			if (other.recordTextDescription != null)
+				return false;
+		} else if (!recordTextDescription.equals(other.recordTextDescription))
+			return false;
+		if (recordTextDescriptionCCSID == null) {
+			if (other.recordTextDescriptionCCSID != null)
+				return false;
+		} else if (!recordTextDescriptionCCSID
+				.equals(other.recordTextDescriptionCCSID))
+			return false;
+		if (reservedHeaderSection == null) {
+			if (other.reservedHeaderSection != null)
+				return false;
+		} else if (!reservedHeaderSection.equals(other.reservedHeaderSection))
+			return false;
+		if (variableLengthFieldsInFormatIndicator == null) {
+			if (other.variableLengthFieldsInFormatIndicator != null)
+				return false;
+		} else if (!variableLengthFieldsInFormatIndicator
+				.equals(other.variableLengthFieldsInFormatIndicator))
+			return false;
+		return true;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -170,6 +251,30 @@ public class HeaderSection implements IHeaderSection, FLDLoutputFormat, Serializ
 
 	public String getVariableLengthFieldsInFormatIndicator() {
 		return variableLengthFieldsInFormatIndicator;
+	}
+
+	@Override
+	public int hashCode() {
+		return toString().hashCode();
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(" File Name Used: " + fileNameUsed.trim());
+		sb.append(" File Library Name Used: " + fileLibraryNameUsed.trim()); 
+		sb.append(" File Type Used: " + fileType.trim()); 
+		sb.append(" Record Format Name Used: " + recordFormatNameUsed.trim()); 
+		sb.append(" Record Length: " + recordLength.toString());
+		sb.append(" Record Format ID: " + recordFormatID.trim()); 
+		sb.append(" Record Text Description: " + recordTextDescription.trim()); 
+		sb.append(" Reserved (Header Section): " + reservedHeaderSection.trim());
+		sb.append(" Record Text Description CCSID: " + recordTextDescriptionCCSID.toString()); 
+		sb.append(" Variable Length Fields in Format Indicator: " + variableLengthFieldsInFormatIndicator.trim());
+		sb.append(" Graphic Fields Indicator: " + graphicFieldsIndicator.toString()); 
+		sb.append(" Date and Time Fields Indicator: " + dateAndTimeFieldsIndicator.trim());
+		sb.append(" Null Capable Fields Indicator: " + nullCapableFieldsIndicator.trim());
+		return sb.toString();
 	}
 
 }

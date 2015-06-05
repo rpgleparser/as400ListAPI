@@ -365,88 +365,342 @@ public class FLDL0100 implements IFLDL0100, FLDLoutputFormat, Serializable {
 
 	}
 
-	/**
-	 * @return the fieldName
-	 */
-	public String getFieldName() {
-		return fieldName;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		FLDL0100 other = (FLDL0100) obj;
+		if (alternativeFieldName == null) {
+			if (other.alternativeFieldName != null)
+				return false;
+		} else if (!alternativeFieldName.equals(other.alternativeFieldName))
+			return false;
+		if (columnHeading1 == null) {
+			if (other.columnHeading1 != null)
+				return false;
+		} else if (!columnHeading1.equals(other.columnHeading1))
+			return false;
+		if (columnHeading2 == null) {
+			if (other.columnHeading2 != null)
+				return false;
+		} else if (!columnHeading2.equals(other.columnHeading2))
+			return false;
+		if (columnHeading3 == null) {
+			if (other.columnHeading3 != null)
+				return false;
+		} else if (!columnHeading3.equals(other.columnHeading3))
+			return false;
+		if (dataType == null) {
+			if (other.dataType != null)
+				return false;
+		} else if (!dataType.equals(other.dataType))
+			return false;
+		if (datalinkIntegrity == null) {
+			if (other.datalinkIntegrity != null)
+				return false;
+		} else if (!datalinkIntegrity.equals(other.datalinkIntegrity))
+			return false;
+		if (datalinkLinkControl == null) {
+			if (other.datalinkLinkControl != null)
+				return false;
+		} else if (!datalinkLinkControl.equals(other.datalinkLinkControl))
+			return false;
+		if (datalinkReadPermission == null) {
+			if (other.datalinkReadPermission != null)
+				return false;
+		} else if (!datalinkReadPermission.equals(other.datalinkReadPermission))
+			return false;
+		if (datalinkRecovery == null) {
+			if (other.datalinkRecovery != null)
+				return false;
+		} else if (!datalinkRecovery.equals(other.datalinkRecovery))
+			return false;
+		if (datalinkUnlinkControl == null) {
+			if (other.datalinkUnlinkControl != null)
+				return false;
+		} else if (!datalinkUnlinkControl.equals(other.datalinkUnlinkControl))
+			return false;
+		if (datalinkWritePermission == null) {
+			if (other.datalinkWritePermission != null)
+				return false;
+		} else if (!datalinkWritePermission
+				.equals(other.datalinkWritePermission))
+			return false;
+		if (dateAndTimeFormat == null) {
+			if (other.dateAndTimeFormat != null)
+				return false;
+		} else if (!dateAndTimeFormat.equals(other.dateAndTimeFormat))
+			return false;
+		if (dateAndTimeSeparator == null) {
+			if (other.dateAndTimeSeparator != null)
+				return false;
+		} else if (!dateAndTimeSeparator.equals(other.dateAndTimeSeparator))
+			return false;
+		if (decimalPositions == null) {
+			if (other.decimalPositions != null)
+				return false;
+		} else if (!decimalPositions.equals(other.decimalPositions))
+			return false;
+		if (digits == null) {
+			if (other.digits != null)
+				return false;
+		} else if (!digits.equals(other.digits))
+			return false;
+		if (displayOrPrintColumnNumber == null) {
+			if (other.displayOrPrintColumnNumber != null)
+				return false;
+		} else if (!displayOrPrintColumnNumber
+				.equals(other.displayOrPrintColumnNumber))
+			return false;
+		if (displayOrPrintRowNumber == null) {
+			if (other.displayOrPrintRowNumber != null)
+				return false;
+		} else if (!displayOrPrintRowNumber
+				.equals(other.displayOrPrintRowNumber))
+			return false;
+		if (editCode == null) {
+			if (other.editCode != null)
+				return false;
+		} else if (!editCode.equals(other.editCode))
+			return false;
+		if (editWord == null) {
+			if (other.editWord != null)
+				return false;
+		} else if (!editWord.equals(other.editWord))
+			return false;
+		if (editWordLength == null) {
+			if (other.editWordLength != null)
+				return false;
+		} else if (!editWordLength.equals(other.editWordLength))
+			return false;
+		if (fieldColumnHeadingsCCSID == null) {
+			if (other.fieldColumnHeadingsCCSID != null)
+				return false;
+		} else if (!fieldColumnHeadingsCCSID
+				.equals(other.fieldColumnHeadingsCCSID))
+			return false;
+		if (fieldDataCCSID == null) {
+			if (other.fieldDataCCSID != null)
+				return false;
+		} else if (!fieldDataCCSID.equals(other.fieldDataCCSID))
+			return false;
+		if (fieldDataEncodingScheme == null) {
+			if (other.fieldDataEncodingScheme != null)
+				return false;
+		} else if (!fieldDataEncodingScheme
+				.equals(other.fieldDataEncodingScheme))
+			return false;
+		if (fieldEditWordsCCSID == null) {
+			if (other.fieldEditWordsCCSID != null)
+				return false;
+		} else if (!fieldEditWordsCCSID.equals(other.fieldEditWordsCCSID))
+			return false;
+		if (fieldLengthInBytes == null) {
+			if (other.fieldLengthInBytes != null)
+				return false;
+		} else if (!fieldLengthInBytes.equals(other.fieldLengthInBytes))
+			return false;
+		if (fieldName == null) {
+			if (other.fieldName != null)
+				return false;
+		} else if (!fieldName.equals(other.fieldName))
+			return false;
+		if (fieldProcedureLibraryName == null) {
+			if (other.fieldProcedureLibraryName != null)
+				return false;
+		} else if (!fieldProcedureLibraryName
+				.equals(other.fieldProcedureLibraryName))
+			return false;
+		if (fieldProcedureProgramName == null) {
+			if (other.fieldProcedureProgramName != null)
+				return false;
+		} else if (!fieldProcedureProgramName
+				.equals(other.fieldProcedureProgramName))
+			return false;
+		if (fieldTextDescription == null) {
+			if (other.fieldTextDescription != null)
+				return false;
+		} else if (!fieldTextDescription.equals(other.fieldTextDescription))
+			return false;
+		if (fieldTextDescriptionCCSID == null) {
+			if (other.fieldTextDescriptionCCSID != null)
+				return false;
+		} else if (!fieldTextDescriptionCCSID
+				.equals(other.fieldTextDescriptionCCSID))
+			return false;
+		if (generatedBy == null) {
+			if (other.generatedBy != null)
+				return false;
+		} else if (!generatedBy.equals(other.generatedBy))
+			return false;
+		if (hostVariableIndicator == null) {
+			if (other.hostVariableIndicator != null)
+				return false;
+		} else if (!hostVariableIndicator.equals(other.hostVariableIndicator))
+			return false;
+		if (identityColumn == null) {
+			if (other.identityColumn != null)
+				return false;
+		} else if (!identityColumn.equals(other.identityColumn))
+			return false;
+		if (identityColumnCache == null) {
+			if (other.identityColumnCache != null)
+				return false;
+		} else if (!identityColumnCache.equals(other.identityColumnCache))
+			return false;
+		if (identityColumnCurrentStartWith == null) {
+			if (other.identityColumnCurrentStartWith != null)
+				return false;
+		} else if (!identityColumnCurrentStartWith
+				.equals(other.identityColumnCurrentStartWith))
+			return false;
+		if (identityColumnCycle == null) {
+			if (other.identityColumnCycle != null)
+				return false;
+		} else if (!identityColumnCycle.equals(other.identityColumnCycle))
+			return false;
+		if (identityColumnIncrementBy == null) {
+			if (other.identityColumnIncrementBy != null)
+				return false;
+		} else if (!identityColumnIncrementBy
+				.equals(other.identityColumnIncrementBy))
+			return false;
+		if (identityColumnMaxValue == null) {
+			if (other.identityColumnMaxValue != null)
+				return false;
+		} else if (!identityColumnMaxValue.equals(other.identityColumnMaxValue))
+			return false;
+		if (identityColumnMinValue == null) {
+			if (other.identityColumnMinValue != null)
+				return false;
+		} else if (!identityColumnMinValue.equals(other.identityColumnMinValue))
+			return false;
+		if (identityColumnOrder == null) {
+			if (other.identityColumnOrder != null)
+				return false;
+		} else if (!identityColumnOrder.equals(other.identityColumnOrder))
+			return false;
+		if (identityColumnOriginalStartWith == null) {
+			if (other.identityColumnOriginalStartWith != null)
+				return false;
+		} else if (!identityColumnOriginalStartWith
+				.equals(other.identityColumnOriginalStartWith))
+			return false;
+		if (implicitlyHidden == null) {
+			if (other.implicitlyHidden != null)
+				return false;
+		} else if (!implicitlyHidden.equals(other.implicitlyHidden))
+			return false;
+		if (inputBufferPosition == null) {
+			if (other.inputBufferPosition != null)
+				return false;
+		} else if (!inputBufferPosition.equals(other.inputBufferPosition))
+			return false;
+		if (internalFieldName == null) {
+			if (other.internalFieldName != null)
+				return false;
+		} else if (!internalFieldName.equals(other.internalFieldName))
+			return false;
+		if (lengthOfAlternativeFieldName == null) {
+			if (other.lengthOfAlternativeFieldName != null)
+				return false;
+		} else if (!lengthOfAlternativeFieldName
+				.equals(other.lengthOfAlternativeFieldName))
+			return false;
+		if (lengthOfUserDefinedTypeName == null) {
+			if (other.lengthOfUserDefinedTypeName != null)
+				return false;
+		} else if (!lengthOfUserDefinedTypeName
+				.equals(other.lengthOfUserDefinedTypeName))
+			return false;
+		if (maximumLargeObjectFieldLength == null) {
+			if (other.maximumLargeObjectFieldLength != null)
+				return false;
+		} else if (!maximumLargeObjectFieldLength
+				.equals(other.maximumLargeObjectFieldLength))
+			return false;
+		if (nullValuesAllowed == null) {
+			if (other.nullValuesAllowed != null)
+				return false;
+		} else if (!nullValuesAllowed.equals(other.nullValuesAllowed))
+			return false;
+		if (numberOfDBCSCharacters == null) {
+			if (other.numberOfDBCSCharacters != null)
+				return false;
+		} else if (!numberOfDBCSCharacters.equals(other.numberOfDBCSCharacters))
+			return false;
+		if (outputBufferPosition == null) {
+			if (other.outputBufferPosition != null)
+				return false;
+		} else if (!outputBufferPosition.equals(other.outputBufferPosition))
+			return false;
+		if (padLengthForLargeObject == null) {
+			if (other.padLengthForLargeObject != null)
+				return false;
+		} else if (!padLengthForLargeObject
+				.equals(other.padLengthForLargeObject))
+			return false;
+		if (reservedFLDL0100 == null) {
+			if (other.reservedFLDL0100 != null)
+				return false;
+		} else if (!reservedFLDL0100.equals(other.reservedFLDL0100))
+			return false;
+		if (rowChangeTimestampGenerated == null) {
+			if (other.rowChangeTimestampGenerated != null)
+				return false;
+		} else if (!rowChangeTimestampGenerated
+				.equals(other.rowChangeTimestampGenerated))
+			return false;
+		if (rowidColumn == null) {
+			if (other.rowidColumn != null)
+				return false;
+		} else if (!rowidColumn.equals(other.rowidColumn))
+			return false;
+		if (ucs2DisplayedFieldLength == null) {
+			if (other.ucs2DisplayedFieldLength != null)
+				return false;
+		} else if (!ucs2DisplayedFieldLength
+				.equals(other.ucs2DisplayedFieldLength))
+			return false;
+		if (use == null) {
+			if (other.use != null)
+				return false;
+		} else if (!use.equals(other.use))
+			return false;
+		if (userDefinedTypeLibraryName == null) {
+			if (other.userDefinedTypeLibraryName != null)
+				return false;
+		} else if (!userDefinedTypeLibraryName
+				.equals(other.userDefinedTypeLibraryName))
+			return false;
+		if (userDefinedTypeName == null) {
+			if (other.userDefinedTypeName != null)
+				return false;
+		} else if (!userDefinedTypeName.equals(other.userDefinedTypeName))
+			return false;
+		if (variableLengthFieldIndicator == null) {
+			if (other.variableLengthFieldIndicator != null)
+				return false;
+		} else if (!variableLengthFieldIndicator
+				.equals(other.variableLengthFieldIndicator))
+			return false;
+		return true;
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T extends FLDLoutputFormat> T fromByteArray(byte[] input) {
+		return ((T) new FLDL0100(input));
 	}
 
 	/**
-	 * @return the dataType
+	 * @return the alternativeFieldName
 	 */
-	public String getDataType() {
-		return dataType;
-	}
-
-	/**
-	 * @return the use
-	 */
-	public String getUse() {
-		return use;
-	}
-
-	/**
-	 * @return the outputBufferPosition
-	 */
-	public Integer getOutputBufferPosition() {
-		return outputBufferPosition;
-	}
-
-	/**
-	 * @return the inputBufferPosition
-	 */
-	public Integer getInputBufferPosition() {
-		return inputBufferPosition;
-	}
-
-	/**
-	 * @return the fieldLengthInBytes
-	 */
-	public Integer getFieldLengthInBytes() {
-		return fieldLengthInBytes;
-	}
-
-	/**
-	 * @return the digits
-	 */
-	public Integer getDigits() {
-		return digits;
-	}
-
-	/**
-	 * @return the decimalPositions
-	 */
-	public Integer getDecimalPositions() {
-		return decimalPositions;
-	}
-
-	/**
-	 * @return the fieldTextDescription
-	 */
-	public String getFieldTextDescription() {
-		return fieldTextDescription;
-	}
-
-	/**
-	 * @return the editCode
-	 */
-	public String getEditCode() {
-		return editCode;
-	}
-
-	/**
-	 * @return the editWordLength
-	 */
-	public Integer getEditWordLength() {
-		return editWordLength;
-	}
-
-	/**
-	 * @return the editWord
-	 */
-	public String getEditWord() {
-		return editWord;
+	public String getAlternativeFieldName() {
+		return alternativeFieldName;
 	}
 
 	/**
@@ -471,143 +725,10 @@ public class FLDL0100 implements IFLDL0100, FLDLoutputFormat, Serializable {
 	}
 
 	/**
-	 * @return the internalFieldName
+	 * @return the datalinkIntegrity
 	 */
-	public String getInternalFieldName() {
-		return internalFieldName;
-	}
-
-	/**
-	 * @return the alternativeFieldName
-	 */
-	public String getAlternativeFieldName() {
-		return alternativeFieldName;
-	}
-
-	/**
-	 * @return the lengthOfAlternativeFieldName
-	 */
-	public Integer getLengthOfAlternativeFieldName() {
-		return lengthOfAlternativeFieldName;
-	}
-
-	/**
-	 * @return the numberOfDBCSCharacters
-	 */
-	public Integer getNumberOfDBCSCharacters() {
-		return numberOfDBCSCharacters;
-	}
-
-	/**
-	 * @return the nullValuesAllowed
-	 */
-	public String getNullValuesAllowed() {
-		return nullValuesAllowed;
-	}
-
-	/**
-	 * @return the hostVariableIndicator
-	 */
-	public String getHostVariableIndicator() {
-		return hostVariableIndicator;
-	}
-
-	/**
-	 * @return the dateAndTimeFormat
-	 */
-	public String getDateAndTimeFormat() {
-		return dateAndTimeFormat;
-	}
-
-	/**
-	 * @return the dateAndTimeSeparator
-	 */
-	public String getDateAndTimeSeparator() {
-		return dateAndTimeSeparator;
-	}
-
-	/**
-	 * @return the variableLengthFieldIndicator
-	 */
-	public String getVariableLengthFieldIndicator() {
-		return variableLengthFieldIndicator;
-	}
-
-	/**
-	 * @return the fieldTextDescriptionCCSID
-	 */
-	public Integer getFieldTextDescriptionCCSID() {
-		return fieldTextDescriptionCCSID;
-	}
-
-	/**
-	 * @return the fieldDataCCSID
-	 */
-	public Integer getFieldDataCCSID() {
-		return fieldDataCCSID;
-	}
-
-	/**
-	 * @return the fieldColumnHeadingsCCSID
-	 */
-	public Integer getFieldColumnHeadingsCCSID() {
-		return fieldColumnHeadingsCCSID;
-	}
-
-	/**
-	 * @return the fieldEditWordsCCSID
-	 */
-	public Integer getFieldEditWordsCCSID() {
-		return fieldEditWordsCCSID;
-	}
-
-	/**
-	 * @return the ucs2DisplayedFieldLength
-	 */
-	public Integer getUcs2DisplayedFieldLength() {
-		return ucs2DisplayedFieldLength;
-	}
-
-	/**
-	 * @return the fieldDataEncodingScheme
-	 */
-	public Integer getFieldDataEncodingScheme() {
-		return fieldDataEncodingScheme;
-	}
-
-	/**
-	 * @return the maximumLargeObjectFieldLength
-	 */
-	public Integer getMaximumLargeObjectFieldLength() {
-		return maximumLargeObjectFieldLength;
-	}
-
-	/**
-	 * @return the padLengthForLargeObject
-	 */
-	public Integer getPadLengthForLargeObject() {
-		return padLengthForLargeObject;
-	}
-
-	/**
-	 * @return the lengthOfUserDefinedTypeName
-	 */
-	public Integer getLengthOfUserDefinedTypeName() {
-		return lengthOfUserDefinedTypeName;
-	}
-
-	/**
-	 * @return the userDefinedTypeName
-	 */
-	public String getUserDefinedTypeName() {
-		return userDefinedTypeName;
-	}
-
-	/**
-	 * @return the userDefinedTypeLibraryName
-	 */
-	public String getUserDefinedTypeLibraryName() {
-		return userDefinedTypeLibraryName;
+	public String getDatalinkIntegrity() {
+		return datalinkIntegrity;
 	}
 
 	/**
@@ -618,24 +739,10 @@ public class FLDL0100 implements IFLDL0100, FLDLoutputFormat, Serializable {
 	}
 
 	/**
-	 * @return the datalinkIntegrity
-	 */
-	public String getDatalinkIntegrity() {
-		return datalinkIntegrity;
-	}
-
-	/**
 	 * @return the datalinkReadPermission
 	 */
 	public String getDatalinkReadPermission() {
 		return datalinkReadPermission;
-	}
-
-	/**
-	 * @return the datalinkWritePermission
-	 */
-	public String getDatalinkWritePermission() {
-		return datalinkWritePermission;
 	}
 
 	/**
@@ -653,10 +760,45 @@ public class FLDL0100 implements IFLDL0100, FLDLoutputFormat, Serializable {
 	}
 
 	/**
-	 * @return the displayOrPrintRowNumber
+	 * @return the datalinkWritePermission
 	 */
-	public Integer getDisplayOrPrintRowNumber() {
-		return displayOrPrintRowNumber;
+	public String getDatalinkWritePermission() {
+		return datalinkWritePermission;
+	}
+
+	/**
+	 * @return the dataType
+	 */
+	public String getDataType() {
+		return dataType;
+	}
+
+	/**
+	 * @return the dateAndTimeFormat
+	 */
+	public String getDateAndTimeFormat() {
+		return dateAndTimeFormat;
+	}
+
+	/**
+	 * @return the dateAndTimeSeparator
+	 */
+	public String getDateAndTimeSeparator() {
+		return dateAndTimeSeparator;
+	}
+
+	/**
+	 * @return the decimalPositions
+	 */
+	public Integer getDecimalPositions() {
+		return decimalPositions;
+	}
+
+	/**
+	 * @return the digits
+	 */
+	public Integer getDigits() {
+		return digits;
 	}
 
 	/**
@@ -667,101 +809,73 @@ public class FLDL0100 implements IFLDL0100, FLDLoutputFormat, Serializable {
 	}
 
 	/**
-	 * @return the rowidColumn
+	 * @return the displayOrPrintRowNumber
 	 */
-	public String getRowidColumn() {
-		return rowidColumn;
+	public Integer getDisplayOrPrintRowNumber() {
+		return displayOrPrintRowNumber;
 	}
 
 	/**
-	 * @return the identityColumn
+	 * @return the editCode
 	 */
-	public String getIdentityColumn() {
-		return identityColumn;
+	public String getEditCode() {
+		return editCode;
 	}
 
 	/**
-	 * @return the generatedBy
+	 * @return the editWord
 	 */
-	public String getGeneratedBy() {
-		return generatedBy;
+	public String getEditWord() {
+		return editWord;
 	}
 
 	/**
-	 * @return the identityColumnCycle
+	 * @return the editWordLength
 	 */
-	public String getIdentityColumnCycle() {
-		return identityColumnCycle;
+	public Integer getEditWordLength() {
+		return editWordLength;
 	}
 
 	/**
-	 * @return the identityColumnOriginalStartWith
+	 * @return the fieldColumnHeadingsCCSID
 	 */
-	public BigDecimal getIdentityColumnOriginalStartWith() {
-		return identityColumnOriginalStartWith;
+	public Integer getFieldColumnHeadingsCCSID() {
+		return fieldColumnHeadingsCCSID;
 	}
 
 	/**
-	 * @return the identityColumnCurrentStartWith
+	 * @return the fieldDataCCSID
 	 */
-	public BigDecimal getIdentityColumnCurrentStartWith() {
-		return identityColumnCurrentStartWith;
+	public Integer getFieldDataCCSID() {
+		return fieldDataCCSID;
 	}
 
 	/**
-	 * @return the identityColumnIncrementBy
+	 * @return the fieldDataEncodingScheme
 	 */
-	public Integer getIdentityColumnIncrementBy() {
-		return identityColumnIncrementBy;
+	public Integer getFieldDataEncodingScheme() {
+		return fieldDataEncodingScheme;
 	}
 
 	/**
-	 * @return the identityColumnMinValue
+	 * @return the fieldEditWordsCCSID
 	 */
-	public BigDecimal getIdentityColumnMinValue() {
-		return identityColumnMinValue;
+	public Integer getFieldEditWordsCCSID() {
+		return fieldEditWordsCCSID;
 	}
 
 	/**
-	 * @return the identityColumnMaxValue
+	 * @return the fieldLengthInBytes
 	 */
-	public BigDecimal getIdentityColumnMaxValue() {
-		return identityColumnMaxValue;
+	public Integer getFieldLengthInBytes() {
+		return fieldLengthInBytes;
 	}
 
 	/**
-	 * @return the identityColumnCache
+	 * @return the fieldName
 	 */
-	public Integer getIdentityColumnCache() {
-		return identityColumnCache;
-	}
-
-	/**
-	 * @return the identityColumnOrder
-	 */
-	public String getIdentityColumnOrder() {
-		return identityColumnOrder;
-	}
-
-	/**
-	 * @return the implicitlyHidden
-	 */
-	public String getImplicitlyHidden() {
-		return implicitlyHidden;
-	}
-
-	/**
-	 * @return the rowChangeTimestampGenerated
-	 */
-	public String getRowChangeTimestampGenerated() {
-		return rowChangeTimestampGenerated;
-	}
-
-	/**
-	 * @return the fieldProcedureProgramName
-	 */
-	public String getFieldProcedureProgramName() {
-		return fieldProcedureProgramName;
+	public String getFieldName() {
+		return fieldName;
 	}
 
 	/**
@@ -772,10 +886,227 @@ public class FLDL0100 implements IFLDL0100, FLDLoutputFormat, Serializable {
 	}
 
 	/**
+	 * @return the fieldProcedureProgramName
+	 */
+	public String getFieldProcedureProgramName() {
+		return fieldProcedureProgramName;
+	}
+
+	/**
+	 * @return the fieldTextDescription
+	 */
+	public String getFieldTextDescription() {
+		return fieldTextDescription;
+	}
+
+	/**
+	 * @return the fieldTextDescriptionCCSID
+	 */
+	public Integer getFieldTextDescriptionCCSID() {
+		return fieldTextDescriptionCCSID;
+	}
+
+	/**
+	 * @return the generatedBy
+	 */
+	public String getGeneratedBy() {
+		return generatedBy;
+	}
+
+	/**
+	 * @return the hostVariableIndicator
+	 */
+	public String getHostVariableIndicator() {
+		return hostVariableIndicator;
+	}
+
+	/**
+	 * @return the identityColumn
+	 */
+	public String getIdentityColumn() {
+		return identityColumn;
+	}
+
+	/**
+	 * @return the identityColumnCache
+	 */
+	public Integer getIdentityColumnCache() {
+		return identityColumnCache;
+	}
+
+	/**
+	 * @return the identityColumnCurrentStartWith
+	 */
+	public BigDecimal getIdentityColumnCurrentStartWith() {
+		return identityColumnCurrentStartWith;
+	}
+
+	/**
+	 * @return the identityColumnCycle
+	 */
+	public String getIdentityColumnCycle() {
+		return identityColumnCycle;
+	}
+
+	/**
+	 * @return the identityColumnIncrementBy
+	 */
+	public Integer getIdentityColumnIncrementBy() {
+		return identityColumnIncrementBy;
+	}
+
+	/**
+	 * @return the identityColumnMaxValue
+	 */
+	public BigDecimal getIdentityColumnMaxValue() {
+		return identityColumnMaxValue;
+	}
+
+	/**
+	 * @return the identityColumnMinValue
+	 */
+	public BigDecimal getIdentityColumnMinValue() {
+		return identityColumnMinValue;
+	}
+
+	/**
+	 * @return the identityColumnOrder
+	 */
+	public String getIdentityColumnOrder() {
+		return identityColumnOrder;
+	}
+
+	/**
+	 * @return the identityColumnOriginalStartWith
+	 */
+	public BigDecimal getIdentityColumnOriginalStartWith() {
+		return identityColumnOriginalStartWith;
+	}
+
+	/**
+	 * @return the implicitlyHidden
+	 */
+	public String getImplicitlyHidden() {
+		return implicitlyHidden;
+	}
+
+	/**
+	 * @return the inputBufferPosition
+	 */
+	public Integer getInputBufferPosition() {
+		return inputBufferPosition;
+	}
+
+	/**
+	 * @return the internalFieldName
+	 */
+	public String getInternalFieldName() {
+		return internalFieldName;
+	}
+
+	/**
+	 * @return the lengthOfAlternativeFieldName
+	 */
+	public Integer getLengthOfAlternativeFieldName() {
+		return lengthOfAlternativeFieldName;
+	}
+
+	/**
+	 * @return the lengthOfUserDefinedTypeName
+	 */
+	public Integer getLengthOfUserDefinedTypeName() {
+		return lengthOfUserDefinedTypeName;
+	}
+
+	/**
+	 * @return the maximumLargeObjectFieldLength
+	 */
+	public Integer getMaximumLargeObjectFieldLength() {
+		return maximumLargeObjectFieldLength;
+	}
+
+	/**
+	 * @return the nullValuesAllowed
+	 */
+	public String getNullValuesAllowed() {
+		return nullValuesAllowed;
+	}
+
+	/**
+	 * @return the numberOfDBCSCharacters
+	 */
+	public Integer getNumberOfDBCSCharacters() {
+		return numberOfDBCSCharacters;
+	}
+
+	/**
+	 * @return the outputBufferPosition
+	 */
+	public Integer getOutputBufferPosition() {
+		return outputBufferPosition;
+	}
+
+	/**
+	 * @return the padLengthForLargeObject
+	 */
+	public Integer getPadLengthForLargeObject() {
+		return padLengthForLargeObject;
+	}
+
+	/**
 	 * @return the reservedFLDL0100
 	 */
 	public String getReservedFLDL0100() {
 		return reservedFLDL0100;
+	}
+
+	/**
+	 * @return the rowChangeTimestampGenerated
+	 */
+	public String getRowChangeTimestampGenerated() {
+		return rowChangeTimestampGenerated;
+	}
+
+	/**
+	 * @return the rowidColumn
+	 */
+	public String getRowidColumn() {
+		return rowidColumn;
+	}
+
+	/**
+	 * @return the ucs2DisplayedFieldLength
+	 */
+	public Integer getUcs2DisplayedFieldLength() {
+		return ucs2DisplayedFieldLength;
+	}
+
+	/**
+	 * @return the use
+	 */
+	public String getUse() {
+		return use;
+	}
+
+	/**
+	 * @return the userDefinedTypeLibraryName
+	 */
+	public String getUserDefinedTypeLibraryName() {
+		return userDefinedTypeLibraryName;
+	}
+
+	/**
+	 * @return the userDefinedTypeName
+	 */
+	public String getUserDefinedTypeName() {
+		return userDefinedTypeName;
+	}
+
+	/**
+	 * @return the variableLengthFieldIndicator
+	 */
+	public String getVariableLengthFieldIndicator() {
+		return variableLengthFieldIndicator;
 	}
 
 	@Override
@@ -870,10 +1201,6 @@ public class FLDL0100 implements IFLDL0100, FLDLoutputFormat, Serializable {
 		sb.append(" reserved (FLDL0100): " + reservedFLDL0100.trim());
 
 		return sb.toString();
-	}
-
-	public <T extends FLDLoutputFormat> T fromByteArray(byte[] input) {
-		return ((T) new FLDL0100(input));
 	}
 
 }

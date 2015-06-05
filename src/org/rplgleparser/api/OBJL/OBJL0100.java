@@ -6,6 +6,12 @@ import com.ibm.as400.access.AS400DataType;
 import com.ibm.as400.access.AS400Structure;
 import com.ibm.as400.access.AS400Text;
 
+/**
+ * A data transfer object with conversion capabilities from AS400 Byte[]. 
+ * This one implements the data format described in the QUSLOBJ OBJL0100 format.
+ * @author Eric N. Wilson
+ *
+ */
 public class OBJL0100 implements IOBJL0100, OBJLoutputFormat, Serializable {
 	private static final long serialVersionUID = 7868263426881998000L;
 	// OBJL0100 List Data Section
@@ -45,18 +51,45 @@ public class OBJL0100 implements IOBJL0100, OBJLoutputFormat, Serializable {
 		this.ObjectTypeUsed = (String)o[2];
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		OBJL0100 other = (OBJL0100) obj;
+		if (ObjectNameUsed == null) {
+			if (other.ObjectNameUsed != null)
+				return false;
+		} else if (!ObjectNameUsed.equals(other.ObjectNameUsed))
+			return false;
+		if (ObjectTypeUsed == null) {
+			if (other.ObjectTypeUsed != null)
+				return false;
+		} else if (!ObjectTypeUsed.equals(other.ObjectTypeUsed))
+			return false;
+		if (objectLibraryNameUsed == null) {
+			if (other.objectLibraryNameUsed != null)
+				return false;
+		} else if (!objectLibraryNameUsed.equals(other.objectLibraryNameUsed))
+			return false;
+		return true;
+	}
 	@SuppressWarnings("unchecked")
 	public <T extends OBJLoutputFormat> T fromByteArray(byte[] input) {
 		return ((T) new OBJL0100(input));
 	}
+
 	public String getObjectLibraryNameUsed() {
 		return objectLibraryNameUsed;
 	}
 
+
 	public String getObjectNameUsed() {
 		return ObjectNameUsed;
 	}
-
 
 	public String getObjectTypeUsed() {
 		return ObjectTypeUsed;

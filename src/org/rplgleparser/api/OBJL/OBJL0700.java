@@ -6,7 +6,12 @@ import com.ibm.as400.access.AS400Bin4;
 import com.ibm.as400.access.AS400DataType;
 import com.ibm.as400.access.AS400Structure;
 import com.ibm.as400.access.AS400Text;
-
+/**
+ * A data transfer object with conversion capabilities from AS400 Byte[]. 
+ * This one implements the data format described in the QUSLOBJ OBJL0700 format.
+ * @author Eric N. Wilson
+ *
+ */
 public class OBJL0700  extends OBJL0600 implements IOBJL0700, OBJLoutputFormat, Serializable{
 	private static final long serialVersionUID = 5445605653804452062L;
 
@@ -198,11 +203,78 @@ public OBJL0700(byte[] input){
 
 }
 
-@SuppressWarnings("unchecked")
-	@Override
-	public <T extends OBJLoutputFormat> T fromByteArray(byte[] input) {
-		return ((T) new OBJL0700(input));
-	}
+@Override
+public boolean equals(Object obj) {
+	if (this == obj)
+		return true;
+	if (obj == null)
+		return false;
+	if (getClass() != obj.getClass())
+		return false;
+	OBJL0700 other = (OBJL0700) obj;
+	if (libraryASPGroupName == null) {
+		if (other.libraryASPGroupName != null)
+			return false;
+	} else if (!libraryASPGroupName.equals(other.libraryASPGroupName))
+		return false;
+	if (objectASPGroupName == null) {
+		if (other.objectASPGroupName != null)
+			return false;
+	} else if (!objectASPGroupName.equals(other.objectASPGroupName))
+		return false;
+	if (objectOverflowedASPIndicator == null) {
+		if (other.objectOverflowedASPIndicator != null)
+			return false;
+	} else if (!objectOverflowedASPIndicator
+			.equals(other.objectOverflowedASPIndicator))
+		return false;
+	if (objectSize == null) {
+		if (other.objectSize != null)
+			return false;
+	} else if (!objectSize.equals(other.objectSize))
+		return false;
+	if (objectSizeMultiplier == null) {
+		if (other.objectSizeMultiplier != null)
+			return false;
+	} else if (!objectSizeMultiplier.equals(other.objectSizeMultiplier))
+		return false;
+	if (reservedOBJL0700 == null) {
+		if (other.reservedOBJL0700 != null)
+			return false;
+	} else if (!reservedOBJL0700.equals(other.reservedOBJL0700))
+		return false;
+	if (startingJournalReceiverLibraryASPDeviceName == null) {
+		if (other.startingJournalReceiverLibraryASPDeviceName != null)
+			return false;
+	} else if (!startingJournalReceiverLibraryASPDeviceName
+			.equals(other.startingJournalReceiverLibraryASPDeviceName))
+		return false;
+	if (startingJournalReceiverLibraryASPGroupName == null) {
+		if (other.startingJournalReceiverLibraryASPGroupName != null)
+			return false;
+	} else if (!startingJournalReceiverLibraryASPGroupName
+			.equals(other.startingJournalReceiverLibraryASPGroupName))
+		return false;
+	if (startingJournalReceiverLibraryName == null) {
+		if (other.startingJournalReceiverLibraryName != null)
+			return false;
+	} else if (!startingJournalReceiverLibraryName
+			.equals(other.startingJournalReceiverLibraryName))
+		return false;
+	if (startingJournalReceiverNameForApply == null) {
+		if (other.startingJournalReceiverNameForApply != null)
+			return false;
+	} else if (!startingJournalReceiverNameForApply
+			.equals(other.startingJournalReceiverNameForApply))
+		return false;
+	return true;
+}
+
+	@SuppressWarnings("unchecked")
+		@Override
+		public <T extends OBJLoutputFormat> T fromByteArray(byte[] input) {
+			return ((T) new OBJL0700(input));
+		}
 
 	public String getLibraryASPGroupName() {
 		return libraryASPGroupName;
@@ -253,7 +325,7 @@ public OBJL0700(byte[] input){
 	public int hashCode() {
 		return toString().hashCode();
 	}
-
+	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();

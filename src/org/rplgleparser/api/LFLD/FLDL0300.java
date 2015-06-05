@@ -13,7 +13,7 @@ import com.ibm.as400.access.AS400Structure;
  *
  */
 public class FLDL0300 implements IFLDL0300, FLDLoutputFormat, Serializable {
-	private static final long serialVersionUID = 7196237050044789530L;
+	protected static final long serialVersionUID = 7196237050044789530L;
 
 	//
 	// FLDL0300 List Data Section
@@ -21,38 +21,38 @@ public class FLDL0300 implements IFLDL0300, FLDLoutputFormat, Serializable {
 	// Offset Type Field
 	// Dec Hex
 	// 0 0 BINARY(4) Length of FLDL0300 format
-	protected AS400Bin4 lengthOfFLD0300Formatx = new AS400Bin4();
+	protected transient AS400Bin4 lengthOfFLD0300Formatx = new AS400Bin4();
 
 	// 4 4 BINARY(4) Displacement to all fields defined by FLDL0100 format
-	protected AS400Bin4 displacementToAllFieldsDefinedByFLD0100Formatx = new AS400Bin4();
+	protected transient AS400Bin4 displacementToAllFieldsDefinedByFLD0100Formatx = new AS400Bin4();
 
 	// 8 8 BINARY(4) Displacement to alternative field name
-	protected AS400Bin4 displacementToAlternativeFieldNamex = new AS400Bin4();
+	protected transient AS400Bin4 displacementToAlternativeFieldNamex = new AS400Bin4();
 	// 12 C BINARY(4) Displacement to default value
-	protected AS400Bin4 displacementToDefaultValuex = new AS400Bin4();
+	protected transient AS400Bin4 displacementToDefaultValuex = new AS400Bin4();
 	// 16 10 BINARY(4) Length of default value
-	protected AS400Bin4 lengthOfDefaultValuex = new AS400Bin4();
+	protected transient AS400Bin4 lengthOfDefaultValuex = new AS400Bin4();
 	// * * All fields defined by FLDL0100 format
 	// * * CHAR(*) Alternative field name (long)
 	// * * CHAR(*) Default value
-	protected AS400DataType[] FLDL0300a = new AS400DataType[] { 
+	protected transient AS400DataType[] FLDL0300a = new AS400DataType[] { 
 			lengthOfFLD0300Formatx,
 			displacementToAllFieldsDefinedByFLD0100Formatx,
 			displacementToAlternativeFieldNamex,
 			displacementToDefaultValuex,
 			lengthOfDefaultValuex 
 			};
-	protected AS400Structure FLDL0300x = new AS400Structure(FLDL0300a);
+	protected transient AS400Structure FLDL0300x = new AS400Structure(FLDL0300a);
 
-	private Integer lengthOfFLD0300Format;
+	protected Integer lengthOfFLD0300Format;
 
-	private Integer displacementToAllFieldsDefinedByFLD0100Format;
+	protected Integer displacementToAllFieldsDefinedByFLD0100Format;
 
-	private Integer displacementToAlternativeFieldName;
+	protected Integer displacementToAlternativeFieldName;
 	
-	private Integer displacementToDefaultValue;
+	protected Integer displacementToDefaultValue;
 
-	private Integer lengthOfDefaultValue;
+	protected Integer lengthOfDefaultValue;
 	
 
 	public FLDL0300(){
@@ -68,6 +68,47 @@ public class FLDL0300 implements IFLDL0300, FLDLoutputFormat, Serializable {
 		lengthOfDefaultValue = (Integer)o[4];
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		FLDL0300 other = (FLDL0300) obj;
+		if (displacementToAllFieldsDefinedByFLD0100Format == null) {
+			if (other.displacementToAllFieldsDefinedByFLD0100Format != null)
+				return false;
+		} else if (!displacementToAllFieldsDefinedByFLD0100Format
+				.equals(other.displacementToAllFieldsDefinedByFLD0100Format))
+			return false;
+		if (displacementToAlternativeFieldName == null) {
+			if (other.displacementToAlternativeFieldName != null)
+				return false;
+		} else if (!displacementToAlternativeFieldName
+				.equals(other.displacementToAlternativeFieldName))
+			return false;
+		if (displacementToDefaultValue == null) {
+			if (other.displacementToDefaultValue != null)
+				return false;
+		} else if (!displacementToDefaultValue
+				.equals(other.displacementToDefaultValue))
+			return false;
+		if (lengthOfDefaultValue == null) {
+			if (other.lengthOfDefaultValue != null)
+				return false;
+		} else if (!lengthOfDefaultValue.equals(other.lengthOfDefaultValue))
+			return false;
+		if (lengthOfFLD0300Format == null) {
+			if (other.lengthOfFLD0300Format != null)
+				return false;
+		} else if (!lengthOfFLD0300Format.equals(other.lengthOfFLD0300Format))
+			return false;
+		return true;
+	}
+
+	@SuppressWarnings("unchecked")
 	public <T extends FLDLoutputFormat> T fromByteArray(byte[] input) {
 		return ((T) new FLDL0300(input));
 	}
@@ -107,17 +148,11 @@ public class FLDL0300 implements IFLDL0300, FLDLoutputFormat, Serializable {
 		return lengthOfFLD0300Format;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
 	@Override
 	public int hashCode() {
 		return toString().hashCode();
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
 	@Override
 	public String toString() {
 		StringBuffer sb = new StringBuffer();

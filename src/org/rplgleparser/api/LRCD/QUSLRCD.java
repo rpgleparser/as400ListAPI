@@ -17,6 +17,12 @@ import com.ibm.as400.access.ObjectDoesNotExistException;
 import com.ibm.as400.access.ProgramCall;
 import com.ibm.as400.access.ProgramParameter;
 
+/**
+ * This is the main workhorse class for calling the QUSLRCD API. Example of usage is
+ * in the main() method
+ * @author Eric N. Wilson
+ *
+ */
 public class QUSLRCD implements ListApiCallback {
 	public static final String RCDL0100_FORMAT = "RCDL0100";
 	

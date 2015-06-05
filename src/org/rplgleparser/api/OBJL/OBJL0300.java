@@ -7,11 +7,14 @@ import com.ibm.as400.access.AS400DataType;
 import com.ibm.as400.access.AS400Structure;
 import com.ibm.as400.access.AS400Text;
 
+/**
+ * A data transfer object with conversion capabilities from AS400 Byte[]. 
+ * This one implements the data format described in the QUSLOBJ OBJL0300 format.
+ * @author Eric N. Wilson
+ *
+ */
 public class OBJL0300 extends OBJL0200 implements IOBJL0300, OBJLoutputFormat, Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5688079050460385438L;
 
 	// OBJL0300 List Data Section
@@ -127,9 +130,151 @@ public class OBJL0300 extends OBJL0200 implements IOBJL0300, OBJLoutputFormat, S
 		libraryASPNumber = (Integer) o[22];
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		OBJL0300 other = (OBJL0300) obj;
+		if (allowChangeByProgram == null) {
+			if (other.allowChangeByProgram != null)
+				return false;
+		} else if (!allowChangeByProgram.equals(other.allowChangeByProgram))
+			return false;
+		if (changeDateAndTime == null) {
+			if (other.changeDateAndTime != null)
+				return false;
+		} else if (!changeDateAndTime.equals(other.changeDateAndTime))
+			return false;
+		if (changedByProgram == null) {
+			if (other.changedByProgram != null)
+				return false;
+		} else if (!changedByProgram.equals(other.changedByProgram))
+			return false;
+		if (creationDateAndTime == null) {
+			if (other.creationDateAndTime != null)
+				return false;
+		} else if (!creationDateAndTime.equals(other.creationDateAndTime))
+			return false;
+		if (digitallySigned == null) {
+			if (other.digitallySigned != null)
+				return false;
+		} else if (!digitallySigned.equals(other.digitallySigned))
+			return false;
+		if (digitallySignedBySystemTrustedSource == null) {
+			if (other.digitallySignedBySystemTrustedSource != null)
+				return false;
+		} else if (!digitallySignedBySystemTrustedSource
+				.equals(other.digitallySignedBySystemTrustedSource))
+			return false;
+		if (digitallySignedMoreThanOnce == null) {
+			if (other.digitallySignedMoreThanOnce != null)
+				return false;
+		} else if (!digitallySignedMoreThanOnce
+				.equals(other.digitallySignedMoreThanOnce))
+			return false;
+		if (libraryASPNumber == null) {
+			if (other.libraryASPNumber != null)
+				return false;
+		} else if (!libraryASPNumber.equals(other.libraryASPNumber))
+			return false;
+		if (objectASPNumber == null) {
+			if (other.objectASPNumber != null)
+				return false;
+		} else if (!objectASPNumber.equals(other.objectASPNumber))
+			return false;
+		if (objectAuditingValue == null) {
+			if (other.objectAuditingValue != null)
+				return false;
+		} else if (!objectAuditingValue.equals(other.objectAuditingValue))
+			return false;
+		if (objectCompressionStatus == null) {
+			if (other.objectCompressionStatus != null)
+				return false;
+		} else if (!objectCompressionStatus
+				.equals(other.objectCompressionStatus))
+			return false;
+		if (objectDomain == null) {
+			if (other.objectDomain != null)
+				return false;
+		} else if (!objectDomain.equals(other.objectDomain))
+			return false;
+		if (objectOwner == null) {
+			if (other.objectOwner != null)
+				return false;
+		} else if (!objectOwner.equals(other.objectOwner))
+			return false;
+		if (reservedOBJL0300 == null) {
+			if (other.reservedOBJL0300 != null)
+				return false;
+		} else if (!reservedOBJL0300.equals(other.reservedOBJL0300))
+			return false;
+		if (storage == null) {
+			if (other.storage != null)
+				return false;
+		} else if (!storage.equals(other.storage))
+			return false;
+		return true;
+	}
+
 	@SuppressWarnings("unchecked")
 	public <T extends OBJLoutputFormat> T fromByteArray(byte[] input) {
 		return ((T)  new OBJL0300(input));
+	}
+
+	public String getAllowChangeByProgram() {
+		return allowChangeByProgram;
+	}
+
+	public String getChangeDateAndTime() {
+		return changeDateAndTime;
+	}
+
+	public String getChangedByProgram() {
+		return changedByProgram;
+	}
+
+	public String getCreationDateAndTime() {
+		return creationDateAndTime;
+	}
+
+	public String getDigitallySigned() {
+		return digitallySigned;
+	}
+
+	public String getDigitallySignedBySystemTrustedSource() {
+		return digitallySignedBySystemTrustedSource;
+	}
+
+	public String getDigitallySignedMoreThanOnce() {
+		return digitallySignedMoreThanOnce;
+	}
+
+	public Integer getLibraryASPNumber() {
+		return libraryASPNumber;
+	}
+
+	public Integer getObjectASPNumber() {
+		return objectASPNumber;
+	}
+
+	public String getObjectAuditingValue() {
+		return objectAuditingValue;
+	}
+
+	public String getObjectCompressionStatus() {
+		return objectCompressionStatus;
+	}
+
+	public String getObjectDomain() {
+		return objectDomain;
+	}
+
+	public String getObjectOwner() {
+		return objectOwner;
 	}
 
 	public IOBJL0200 getOBJL0200() {
@@ -148,64 +293,12 @@ public class OBJL0300 extends OBJL0200 implements IOBJL0300, OBJLoutputFormat, S
 		return result;
 	}
 
-	public Integer getObjectASPNumber() {
-		return objectASPNumber;
-	}
-
-	public String getObjectOwner() {
-		return objectOwner;
-	}
-
-	public String getObjectDomain() {
-		return objectDomain;
-	}
-
-	public String getCreationDateAndTime() {
-		return creationDateAndTime;
-	}
-
-	public String getChangeDateAndTime() {
-		return changeDateAndTime;
-	}
-
-	public String getStorage() {
-		return storage;
-	}
-
-	public String getObjectCompressionStatus() {
-		return objectCompressionStatus;
-	}
-
-	public String getAllowChangeByProgram() {
-		return allowChangeByProgram;
-	}
-
-	public String getChangedByProgram() {
-		return changedByProgram;
-	}
-
-	public String getObjectAuditingValue() {
-		return objectAuditingValue;
-	}
-
-	public String getDigitallySigned() {
-		return digitallySigned;
-	}
-
-	public String getDigitallySignedBySystemTrustedSource() {
-		return digitallySignedBySystemTrustedSource;
-	}
-
-	public String getDigitallySignedMoreThanOnce() {
-		return digitallySignedMoreThanOnce;
-	}
-
 	public String getReservedOBJL0300() {
 		return reservedOBJL0300;
 	}
 
-	public Integer getLibraryASPNumber() {
-		return libraryASPNumber;
+	public String getStorage() {
+		return storage;
 	}
 
 	@Override

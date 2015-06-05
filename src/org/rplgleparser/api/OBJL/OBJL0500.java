@@ -7,6 +7,12 @@ import com.ibm.as400.access.AS400DataType;
 import com.ibm.as400.access.AS400Structure;
 import com.ibm.as400.access.AS400Text;
 
+/**
+ * A data transfer object with conversion capabilities from AS400 Byte[]. 
+ * This one implements the data format described in the QUSLOBJ OBJL0500 format.
+ * @author Eric N. Wilson
+ *
+ */
 public class OBJL0500 extends OBJL0400 implements IOBJL0500,
 		OBJLoutputFormat, Serializable {
 
@@ -228,10 +234,157 @@ public class OBJL0500 extends OBJL0400 implements IOBJL0500,
 		remoteJournalFilter = (String)o[59];
 		reservedOBJL0500 = (String)o[60];
 	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		OBJL0500 other = (OBJL0500) obj;
+		if (journalEntriesToBeOmitted == null) {
+			if (other.journalEntriesToBeOmitted != null)
+				return false;
+		} else if (!journalEntriesToBeOmitted
+				.equals(other.journalEntriesToBeOmitted))
+			return false;
+		if (journalImages == null) {
+			if (other.journalImages != null)
+				return false;
+		} else if (!journalImages.equals(other.journalImages))
+			return false;
+		if (journalLibraryName == null) {
+			if (other.journalLibraryName != null)
+				return false;
+		} else if (!journalLibraryName.equals(other.journalLibraryName))
+			return false;
+		if (journalName == null) {
+			if (other.journalName != null)
+				return false;
+		} else if (!journalName.equals(other.journalName))
+			return false;
+		if (journalStartDateAndTime == null) {
+			if (other.journalStartDateAndTime != null)
+				return false;
+		} else if (!journalStartDateAndTime
+				.equals(other.journalStartDateAndTime))
+			return false;
+		if (journalStatus == null) {
+			if (other.journalStatus != null)
+				return false;
+		} else if (!journalStatus.equals(other.journalStatus))
+			return false;
+		if (objectRestoredDateAndTime == null) {
+			if (other.objectRestoredDateAndTime != null)
+				return false;
+		} else if (!objectRestoredDateAndTime
+				.equals(other.objectRestoredDateAndTime))
+			return false;
+		if (objectSavedDateAndTime == null) {
+			if (other.objectSavedDateAndTime != null)
+				return false;
+		} else if (!objectSavedDateAndTime.equals(other.objectSavedDateAndTime))
+			return false;
+		if (remoteJournalFilter == null) {
+			if (other.remoteJournalFilter != null)
+				return false;
+		} else if (!remoteJournalFilter.equals(other.remoteJournalFilter))
+			return false;
+		if (reservedOBJL0500 == null) {
+			if (other.reservedOBJL0500 != null)
+				return false;
+		} else if (!reservedOBJL0500.equals(other.reservedOBJL0500))
+			return false;
+		if (saveActiveDateAndTime == null) {
+			if (other.saveActiveDateAndTime != null)
+				return false;
+		} else if (!saveActiveDateAndTime.equals(other.saveActiveDateAndTime))
+			return false;
+		if (saveCommand == null) {
+			if (other.saveCommand != null)
+				return false;
+		} else if (!saveCommand.equals(other.saveCommand))
+			return false;
+		if (saveDevice == null) {
+			if (other.saveDevice != null)
+				return false;
+		} else if (!saveDevice.equals(other.saveDevice))
+			return false;
+		if (saveFileLibraryName == null) {
+			if (other.saveFileLibraryName != null)
+				return false;
+		} else if (!saveFileLibraryName.equals(other.saveFileLibraryName))
+			return false;
+		if (saveFileName == null) {
+			if (other.saveFileName != null)
+				return false;
+		} else if (!saveFileName.equals(other.saveFileName))
+			return false;
+		if (saveLabel == null) {
+			if (other.saveLabel != null)
+				return false;
+		} else if (!saveLabel.equals(other.saveLabel))
+			return false;
+		if (saveSequenceNumber == null) {
+			if (other.saveSequenceNumber != null)
+				return false;
+		} else if (!saveSequenceNumber.equals(other.saveSequenceNumber))
+			return false;
+		if (saveVolumeID == null) {
+			if (other.saveVolumeID != null)
+				return false;
+		} else if (!saveVolumeID.equals(other.saveVolumeID))
+			return false;
+		if (savedSize == null) {
+			if (other.savedSize != null)
+				return false;
+		} else if (!savedSize.equals(other.savedSize))
+			return false;
+		if (savedSizeMultiplier == null) {
+			if (other.savedSizeMultiplier != null)
+				return false;
+		} else if (!savedSizeMultiplier.equals(other.savedSizeMultiplier))
+			return false;
+		return true;
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public <T extends OBJLoutputFormat> T fromByteArray(byte[] input) {
 		return ((T) new OBJL0500(input));
+	}
+
+	public String getJournalEntriesToBeOmitted() {
+		return journalEntriesToBeOmitted;
+	}
+
+	public String getJournalImages() {
+		return journalImages;
+	}
+
+	public String getJournalLibraryName() {
+		return journalLibraryName;
+	}
+
+	public String getJournalName() {
+		return journalName;
+	}
+
+	public String getJournalStartDateAndTime() {
+		return journalStartDateAndTime;
+	}
+
+	public String getJournalStatus() {
+		return journalStatus;
+	}
+
+	public String getObjectRestoredDateAndTime() {
+		return objectRestoredDateAndTime;
+	}
+
+	public String getObjectSavedDateAndTime() {
+		return objectSavedDateAndTime;
 	}
 
 	public IOBJL0400 getOBJL0400() {
@@ -284,16 +437,12 @@ public class OBJL0500 extends OBJL0400 implements IOBJL0500,
 		return result;
 	}
 
-	public String getObjectSavedDateAndTime() {
-		return objectSavedDateAndTime;
+	public String getRemoteJournalFilter() {
+		return remoteJournalFilter;
 	}
 
-	public String getObjectRestoredDateAndTime() {
-		return objectRestoredDateAndTime;
-	}
-
-	public Integer getSavedSize() {
-		return savedSize;
+	public String getReservedOBJL0500() {
+		return reservedOBJL0500;
 	}
 
 	public String getSaveActiveDateAndTime() {
@@ -306,6 +455,10 @@ public class OBJL0500 extends OBJL0400 implements IOBJL0500,
 
 	public String getSaveDevice() {
 		return saveDevice;
+	}
+
+	public Integer getSavedSize() {
+		return savedSize;
 	}
 
 	public Integer getSavedSizeMultiplier() {
@@ -330,38 +483,6 @@ public class OBJL0500 extends OBJL0400 implements IOBJL0500,
 
 	public String getSaveVolumeID() {
 		return saveVolumeID;
-	}
-
-	public String getJournalEntriesToBeOmitted() {
-		return journalEntriesToBeOmitted;
-	}
-
-	public String getJournalImages() {
-		return journalImages;
-	}
-
-	public String getJournalLibraryName() {
-		return journalLibraryName;
-	}
-
-	public String getJournalName() {
-		return journalName;
-	}
-
-	public String getJournalStartDateAndTime() {
-		return journalStartDateAndTime;
-	}
-
-	public String getJournalStatus() {
-		return journalStatus;
-	}
-
-	public String getRemoteJournalFilter() {
-		return remoteJournalFilter;
-	}
-
-	public String getReservedOBJL0500() {
-		return reservedOBJL0500;
 	}
 
 	@Override

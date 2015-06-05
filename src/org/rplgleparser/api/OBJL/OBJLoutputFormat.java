@@ -1,6 +1,6 @@
 package org.rplgleparser.api.OBJL;
 /**
- * This is a marker interface that all the object list apis implement so that they can be treated generically when needed
+ * This is a marker interface that all the object list APIs implement so that they can be treated generically when needed
  * @author ewilson
  *
  */

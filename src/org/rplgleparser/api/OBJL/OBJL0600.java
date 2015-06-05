@@ -7,6 +7,12 @@ import com.ibm.as400.access.AS400DataType;
 import com.ibm.as400.access.AS400Structure;
 import com.ibm.as400.access.AS400Text;
 
+/**
+ * A data transfer object with conversion capabilities from AS400 Byte[]. 
+ * This one implements the data format described in the QUSLOBJ OBJL0600 format.
+ * @author Eric N. Wilson
+ *
+ */
 public class OBJL0600 extends OBJL0500 implements IOBJL0600, OBJLoutputFormat, Serializable{
 	private static final long serialVersionUID = 2493507646818808790L;
 
@@ -329,6 +335,54 @@ public class OBJL0600 extends OBJL0500 implements IOBJL0600, OBJLoutputFormat, S
 		sb.append(" Reserved (OBJL0600): " + reservedOBJL0600.trim());
 
 		return sb.toString();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		OBJL0600 other = (OBJL0600) obj;
+		if (daysUsedCount == null) {
+			if (other.daysUsedCount != null)
+				return false;
+		} else if (!daysUsedCount.equals(other.daysUsedCount))
+			return false;
+		if (lastUsedDateAndTime == null) {
+			if (other.lastUsedDateAndTime != null)
+				return false;
+		} else if (!lastUsedDateAndTime.equals(other.lastUsedDateAndTime))
+			return false;
+		if (libraryASPDeviceName == null) {
+			if (other.libraryASPDeviceName != null)
+				return false;
+		} else if (!libraryASPDeviceName.equals(other.libraryASPDeviceName))
+			return false;
+		if (objectASPDeviceName == null) {
+			if (other.objectASPDeviceName != null)
+				return false;
+		} else if (!objectASPDeviceName.equals(other.objectASPDeviceName))
+			return false;
+		if (reservedOBJL0600 == null) {
+			if (other.reservedOBJL0600 != null)
+				return false;
+		} else if (!reservedOBJL0600.equals(other.reservedOBJL0600))
+			return false;
+		if (resetDateAndTime == null) {
+			if (other.resetDateAndTime != null)
+				return false;
+		} else if (!resetDateAndTime.equals(other.resetDateAndTime))
+			return false;
+		if (usageInformationUpdated == null) {
+			if (other.usageInformationUpdated != null)
+				return false;
+		} else if (!usageInformationUpdated
+				.equals(other.usageInformationUpdated))
+			return false;
+		return true;
 	}
 
 }

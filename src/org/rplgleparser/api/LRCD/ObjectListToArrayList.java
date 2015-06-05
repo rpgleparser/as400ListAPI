@@ -4,6 +4,13 @@ import java.util.ArrayList;
 
 import org.rplgleparser.api.OBJL.OBJLoutputFormat;
 
+/**
+ * This class serves as a trivial example of how to extend the QUSLRCD class and use the
+ * data for a given purpose. Here we have tried to keep it simple and just stick the entries
+ * into an ArrayList
+ * @author Eric N. Wilson
+ *
+ */
 public class ObjectListToArrayList extends QUSLRCD {
 	public static void main(String[] args) {
 		ObjectListToArrayList myobj = new ObjectListToArrayList();
@@ -35,18 +42,18 @@ public class ObjectListToArrayList extends QUSLRCD {
 
 	@Override
 	public boolean processEntry(byte[] listEntry) {
-		RCDLoutputFormat workVar;
+		OBJLoutputFormat workVar;
 		if (requestedFormat.equals(RCDL0100_FORMAT)){
-			workVar = new RCDL0100(listEntry);
+			workVar = (OBJLoutputFormat) new RCDL0100(listEntry);
 		} else if (requestedFormat.equals(RCDL0200_FORMAT)){
-			workVar = new RCDL0200(listEntry);
+			workVar = (OBJLoutputFormat) new RCDL0200(listEntry);
 		} else if (requestedFormat.equals(RCDL0300_FORMAT)){
-			workVar = new RCDL0300(listEntry);
+			workVar = (OBJLoutputFormat) new RCDL0300(listEntry);
 		} else {
 			return false;
 		}
 		
-		System.out.println(workVar.toString());
+		theList.add(workVar);
 		return true;
 	}
 

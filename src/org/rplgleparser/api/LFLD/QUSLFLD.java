@@ -25,6 +25,12 @@ import com.ibm.as400.access.ProgramParameter;
  */
 public class QUSLFLD implements ListApiCallback {
 
+	public static final String FLDL0100_FORMAT = "FLDL0100";
+
+	public static final String FLDL0200_FORMAT = "FLDL0200";
+
+	public static final String FLDL0300_FORMAT = "FLDL0300";
+	
 	public static void main(String[] args) {
 		QUSLFLD myobj = new QUSLFLD();
 		myobj.setAs400ToConnectTo("DEV400");
@@ -38,12 +44,7 @@ public class QUSLFLD implements ListApiCallback {
 		myobj.dowork();
 		System.exit(0);
 	}
-
 	protected AS400ListAPI theListHandler = new AS400ListAPI();
-
-	public static final String FLDL0100_FORMAT = "FLDL0100";
-	public static final String FLDL0200_FORMAT = "FLDL0200";
-	public static final String FLDL0300_FORMAT = "FLDL0300";
 	
 	protected String userSpaceName;
 	protected String userSpaceLib;
@@ -86,8 +87,12 @@ public class QUSLFLD implements ListApiCallback {
 	protected ProgramCall pc;
 
 	
-	//
-	//
+	protected void createUserSpace() throws AS400SecurityException,
+			ErrorCompletingRequestException, InterruptedException, IOException,
+			ObjectDoesNotExistException, PropertyVetoException {
+		theListHandler.createUserSpace(userSpaceLib, userSpaceName, userSpaceInitialSize, userSpaceDescription);
+	}
+
 	protected void dowork() {
 		try {
 			prepareConnection();
@@ -133,13 +138,111 @@ public class QUSLFLD implements ListApiCallback {
 			e.printStackTrace();
 		}
 	}
-	protected void registerCallback() {
-		theListHandler.registerCallback(this);
+	/**
+	 * @return the as400ToConnectTo
+	 */
+	public String getAs400ToConnectTo() {
+		return as400ToConnectTo;
 	}
-	protected void createUserSpace() throws AS400SecurityException,
-			ErrorCompletingRequestException, InterruptedException, IOException,
-			ObjectDoesNotExistException, PropertyVetoException {
-		theListHandler.createUserSpace(userSpaceLib, userSpaceName, userSpaceInitialSize, userSpaceDescription);
+	/**
+	 * @return the as400UserName
+	 */
+	public String getAs400UserName() {
+		return as400UserName;
+	}
+	/**
+	 * @return the as400UserPassword
+	 */
+	public String getAs400UserPassword() {
+		return as400UserPassword;
+	}
+	/**
+	 * @return the desiredFormat
+	 */
+	public String getDesiredFormat() {
+		return desiredFormat;
+	}
+	/**
+	 * @return the fileLib
+	 */
+	public String getFileLib() {
+		return fileLib;
+	}
+	/**
+	 * @return the fileMember
+	 */
+	public String getFileMember() {
+		return recordFormat;
+	}
+	/**
+	 * @return the fileName
+	 */
+	public String getFileName() {
+		return fileName;
+	}
+	/**
+	 * @return the overrideProcessing
+	 */
+	public AS400Text getOverrideProcessing() {
+		return overrideProcessing;
+	}
+	/**
+	 * @return the pc
+	 */
+	public ProgramCall getPc() {
+		return pc;
+	}
+	/**
+	 * @return the recordFormat
+	 */
+	public String getRecordFormat() {
+		return recordFormat;
+	}
+	/**
+	 * @return the theListHandler
+	 */
+	public AS400ListAPI getTheListHandler() {
+		return theListHandler;
+	}
+	/**
+	 * @return the userSpaceDescription
+	 */
+	public String getUserSpaceDescription() {
+		return userSpaceDescription;
+	}
+	/**
+	 * @return the userSpaceInitialSize
+	 */
+	public int getUserSpaceInitialSize() {
+		return userSpaceInitialSize;
+	}
+	/**
+	 * @return the userSpaceLib
+	 */
+	public String getUserSpaceLib() {
+		return userSpaceLib;
+	}
+	/**
+	 * @return the userSpaceName
+	 */
+	public String getUserSpaceName() {
+		return userSpaceName;
+	}
+	/**
+	 * @return the performOverrides
+	 */
+	public boolean isPerformOverrides() {
+		return performOverrides;
+	}
+	protected void prepareConnection() throws PropertyVetoException {
+		AS400 theSystem = theListHandler.getTheSystem();
+		theSystem.setSystemName(as400ToConnectTo);
+		theSystem.setUserId(as400UserName);
+		if (as400UserPassword != null){
+			theSystem.setPassword(as400UserPassword);
+		}
+		pc = theListHandler.getPc();
+		System.out.println("Creating User Space");
 	}
 	protected void prepareProgramCall() throws PropertyVetoException {
 		// List Fields (QUSLFLD) API
@@ -184,46 +287,6 @@ public class QUSLFLD implements ListApiCallback {
 
 		pc.setProgram(programName, parameterList);
 	}
-	protected void prepareConnection() throws PropertyVetoException {
-		AS400 theSystem = theListHandler.getTheSystem();
-		theSystem.setSystemName(as400ToConnectTo);
-		theSystem.setUserId(as400UserName);
-		if (as400UserPassword != null){
-			theSystem.setPassword(as400UserPassword);
-		}
-		pc = theListHandler.getPc();
-		System.out.println("Creating User Space");
-	}
-	/**
-	 * @return the fileLib
-	 */
-	public String getFileLib() {
-		return fileLib;
-	}
-	/**
-	 * @return the fileMember
-	 */
-	public String getFileMember() {
-		return recordFormat;
-	}
-	/**
-	 * @return the fileName
-	 */
-	public String getFileName() {
-		return fileName;
-	}
-	/**
-	 * @return the userSpaceLib
-	 */
-	public String getUserSpaceLib() {
-		return userSpaceLib;
-	}
-	/**
-	 * @return the userSpaceName
-	 */
-	public String getUserSpaceName() {
-		return userSpaceName;
-	}
 	public boolean processEntry(byte[] input) {
 		FLDLoutputFormat wrkVal = null;
 		if (desiredFormat.equalsIgnoreCase(FLDL0100_FORMAT)){
@@ -238,6 +301,33 @@ public class QUSLFLD implements ListApiCallback {
 		System.out.println(wrkVal.toString());
 		return true;
 	}
+	protected void registerCallback() {
+		theListHandler.registerCallback(this);
+	}
+	/**
+	 * @param as400ToConnectTo the as400ToConnectTo to set
+	 */
+	public void setAs400ToConnectTo(String as400ToConnectTo) {
+		this.as400ToConnectTo = as400ToConnectTo;
+	}
+	/**
+	 * @param as400UserName the as400UserName to set
+	 */
+	public void setAs400UserName(String as400UserName) {
+		this.as400UserName = as400UserName;
+	}
+	/**
+	 * @param as400UserPassword the as400UserPassword to set
+	 */
+	public void setAs400UserPassword(String as400UserPassword) {
+		this.as400UserPassword = as400UserPassword;
+	}
+	/**
+	 * @param desiredFormat the desiredFormat to set
+	 */
+	public void setDesiredFormat(String desiredFormat) {
+		this.desiredFormat = desiredFormat;
+	}
 	/**
 	 * @param fileLib the fileLib to set
 	 */
@@ -251,10 +341,34 @@ public class QUSLFLD implements ListApiCallback {
 		this.fileName = fileName;
 	}
 	/**
+	 * @param overrideProcessing the overrideProcessing to set
+	 */
+	public void setOverrideProcessing(AS400Text overrideProcessing) {
+		this.overrideProcessing = overrideProcessing;
+	}
+	/**
+	 * @param performOverrides the performOverrides to set
+	 */
+	public void setPerformOverrides(boolean performOverrides) {
+		this.performOverrides = performOverrides;
+	}
+	/**
 	 * @param fileMember the fileMember to set
 	 */
 	public void setRecordFormat(String recordFormat) {
 		this.recordFormat = recordFormat;
+	}
+	/**
+	 * @param userSpaceDescription the userSpaceDescription to set
+	 */
+	public void setUserSpaceDescription(String userSpaceDescription) {
+		this.userSpaceDescription = userSpaceDescription;
+	}
+	/**
+	 * @param userSpaceInitialSize the userSpaceInitialSize to set
+	 */
+	public void setUserSpaceInitialSize(int userSpaceInitialSize) {
+		this.userSpaceInitialSize = userSpaceInitialSize;
 	}
 	/**
 	 * @param userSpaceLib the userSpaceLib to set
@@ -267,120 +381,6 @@ public class QUSLFLD implements ListApiCallback {
 	 */
 	public void setUserSpaceName(String userSpaceName) {
 		this.userSpaceName = userSpaceName;
-	}
-	/**
-	 * @return the as400ToConnectTo
-	 */
-	public String getAs400ToConnectTo() {
-		return as400ToConnectTo;
-	}
-	/**
-	 * @param as400ToConnectTo the as400ToConnectTo to set
-	 */
-	public void setAs400ToConnectTo(String as400ToConnectTo) {
-		this.as400ToConnectTo = as400ToConnectTo;
-	}
-	/**
-	 * @return the as400UserName
-	 */
-	public String getAs400UserName() {
-		return as400UserName;
-	}
-	/**
-	 * @param as400UserName the as400UserName to set
-	 */
-	public void setAs400UserName(String as400UserName) {
-		this.as400UserName = as400UserName;
-	}
-	/**
-	 * @return the as400UserPassword
-	 */
-	public String getAs400UserPassword() {
-		return as400UserPassword;
-	}
-	/**
-	 * @param as400UserPassword the as400UserPassword to set
-	 */
-	public void setAs400UserPassword(String as400UserPassword) {
-		this.as400UserPassword = as400UserPassword;
-	}
-	/**
-	 * @return the userSpaceInitialSize
-	 */
-	public int getUserSpaceInitialSize() {
-		return userSpaceInitialSize;
-	}
-	/**
-	 * @param userSpaceInitialSize the userSpaceInitialSize to set
-	 */
-	public void setUserSpaceInitialSize(int userSpaceInitialSize) {
-		this.userSpaceInitialSize = userSpaceInitialSize;
-	}
-	/**
-	 * @return the userSpaceDescription
-	 */
-	public String getUserSpaceDescription() {
-		return userSpaceDescription;
-	}
-	/**
-	 * @param userSpaceDescription the userSpaceDescription to set
-	 */
-	public void setUserSpaceDescription(String userSpaceDescription) {
-		this.userSpaceDescription = userSpaceDescription;
-	}
-	/**
-	 * @return the desiredFormat
-	 */
-	public String getDesiredFormat() {
-		return desiredFormat;
-	}
-	/**
-	 * @param desiredFormat the desiredFormat to set
-	 */
-	public void setDesiredFormat(String desiredFormat) {
-		this.desiredFormat = desiredFormat;
-	}
-	/**
-	 * @return the performOverrides
-	 */
-	public boolean isPerformOverrides() {
-		return performOverrides;
-	}
-	/**
-	 * @param performOverrides the performOverrides to set
-	 */
-	public void setPerformOverrides(boolean performOverrides) {
-		this.performOverrides = performOverrides;
-	}
-	/**
-	 * @return the overrideProcessing
-	 */
-	public AS400Text getOverrideProcessing() {
-		return overrideProcessing;
-	}
-	/**
-	 * @param overrideProcessing the overrideProcessing to set
-	 */
-	public void setOverrideProcessing(AS400Text overrideProcessing) {
-		this.overrideProcessing = overrideProcessing;
-	}
-	/**
-	 * @return the theListHandler
-	 */
-	public AS400ListAPI getTheListHandler() {
-		return theListHandler;
-	}
-	/**
-	 * @return the recordFormat
-	 */
-	public String getRecordFormat() {
-		return recordFormat;
-	}
-	/**
-	 * @return the pc
-	 */
-	public ProgramCall getPc() {
-		return pc;
 	}
 
 }

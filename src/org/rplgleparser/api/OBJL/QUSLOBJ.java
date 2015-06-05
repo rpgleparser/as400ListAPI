@@ -17,6 +17,12 @@ import com.ibm.as400.access.ObjectDoesNotExistException;
 import com.ibm.as400.access.ProgramCall;
 import com.ibm.as400.access.ProgramParameter;
 
+/**
+ * This is the main workhorse class for calling the QUSLOBJ API. Example of usage is
+ * in the main() method
+ * @author Eric N. Wilson
+ *
+ */
 public class QUSLOBJ implements ListApiCallback {
 	public static final String OBJ0100_FORMAT = "OBJL0100";
 	public static final String OBJ0200_FORMAT = "OBJL0200";

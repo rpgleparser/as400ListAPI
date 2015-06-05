@@ -6,7 +6,6 @@ package org.rplgleparser.api.LFLD;
  * @author Eric N. Wilson
  *
  */
-
 public interface IHeaderSection {
 	public String getDateAndTimeFieldsIndicator();
 
