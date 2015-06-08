@@ -13,7 +13,12 @@ import com.ibm.as400.access.Job;
 import com.ibm.as400.access.ObjectDoesNotExistException;
 import com.ibm.as400.access.ProgramCall;
 
-
+/**
+ * This class handles the modification of a library list. 
+ * Needs to have a valid connection to the AS400. 
+ * @author Eric N. Wilson
+ *
+ */
 public class LibraryList {
 	private ArrayList<String> previousLibraryList = new ArrayList<String>();
 	private ArrayList<String> workingLibraryList = new ArrayList<String>();
@@ -33,27 +38,27 @@ public class LibraryList {
 			myList.setManagedJob(myList.pc.getServerJob());
 
 			myList.refreshFromServer();
-			printWorkingLibraryList(myList);
-			System.out.println();
+//			printWorkingLibraryList(myList);
+//			System.out.println();
 			
 			myList.removeLibraryListEntry("ewilson2");
 			
-			printWorkingLibraryList(myList);
-			System.out.println();
+//			printWorkingLibraryList(myList);
+//			System.out.println();
 			myList.commit();
 
 			myList.refreshFromServer();
-			printWorkingLibraryList(myList);
-			System.out.println();
+//			printWorkingLibraryList(myList);
+//			System.out.println();
 
 			myList.addEntryAfter("EWILSON", "EWILSON2");
-			printWorkingLibraryList(myList);
-			System.out.println();
+//			printWorkingLibraryList(myList);
+//			System.out.println();
 			myList.commit();
 
 			myList.refreshFromServer();
-			printWorkingLibraryList(myList);
-			System.out.println();
+//			printWorkingLibraryList(myList);
+//			System.out.println();
 
 			System.exit(0);
 			
@@ -193,9 +198,9 @@ public class LibraryList {
 	public void commit() throws PropertyVetoException, AS400SecurityException,
 			ErrorCompletingRequestException, IOException, InterruptedException {
 		StringBuilder sb = new StringBuilder();
-		System.out.println(managedJob.getUser() + "/" + managedJob.getName() + "/" + managedJob.getNumber());
-		System.out.println(cc.getServerJob().getUser() + "/" + cc.getServerJob().getName() + "/" + cc.getServerJob().getNumber());
-		System.out.println(pc.getServerJob().getUser() + "/" + pc.getServerJob().getName() + "/" + pc.getServerJob().getNumber());
+//		System.out.println(managedJob.getUser() + "/" + managedJob.getName() + "/" + managedJob.getNumber());
+//		System.out.println(cc.getServerJob().getUser() + "/" + cc.getServerJob().getName() + "/" + cc.getServerJob().getNumber());
+//		System.out.println(pc.getServerJob().getUser() + "/" + pc.getServerJob().getName() + "/" + pc.getServerJob().getNumber());
 		sb.append("CHGLIBL LIBL(");
 		for (String s : workingLibraryList) {
 			sb.append(" " + s);
