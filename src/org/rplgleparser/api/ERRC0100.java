@@ -11,8 +11,8 @@ public class ERRC0100 implements IERRC0100, Serializable {
 
 	protected static final long serialVersionUID = -2607744170677503147L;
 
-	// Format ERRC0100
-	// Table 1. Format ERRC0100 for the error code parameter
+	// Format xERRC0100
+	// Table 1. Format xERRC0100 for the error code parameter
 	/** 0 0 INPUT BINARY(4) Bytes provided */
 	protected transient AS400Bin4 bytesProvidedx = new AS400Bin4();
 
@@ -99,7 +99,7 @@ public class ERRC0100 implements IERRC0100, Serializable {
 		sb.append("Bytes Provided: " + bytesProvided.toString());
 		sb.append("Bytes Available: " + bytesAvailable.toString()); 
 		sb.append("Exception ID: " + exceptionID.trim()); 
-		sb.append("Reserved (ERRC0100): " + ERRC0100Reserved.trim());
+		sb.append("Reserved (xERRC0100): " + ERRC0100Reserved.trim());
 		return sb.toString();
 	}
 
@@ -121,6 +121,10 @@ public class ERRC0100 implements IERRC0100, Serializable {
 
 	public String getERRC0100Reserved() {
 		return ERRC0100Reserved;
+	}
+
+	public AS400Structure getERRC0100x() {
+		return ERRC0100x;
 	}
 
 }

@@ -1,20 +1,20 @@
 package org.rplgleparser.api;
 
 /**
- * Interface for interacting with an ERRC0100 object
+ * Interface for interacting with an xERRC0100 object
  * @author Eric N. Wilson
  *
  */
 public interface IERRC0100 {
 	
 	/**
-	 * An initializer for the bare bones ERRC0100 object
-	 * @return An object array that can be used to initialize an ERRC0100 object
+	 * An initializer for the bare bones xERRC0100 object
+	 * @return An object array that can be used to initialize an xERRC0100 object
 	 */
 	public Object[] getERRC0100j();
 
 	/**
-	 * Returns the size in bytes of the ERRC0100 structure passed to the iSeries
+	 * Returns the size in bytes of the xERRC0100 structure passed to the iSeries
 	 * @return Number of bytes provided
 	 */
 	public Integer getBytesProvided();

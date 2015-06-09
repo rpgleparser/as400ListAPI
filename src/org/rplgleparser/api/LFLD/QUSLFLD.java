@@ -5,12 +5,12 @@ import java.io.IOException;
 
 import org.apache.commons.lang3.StringUtils;
 import org.rplgleparser.api.AS400ListAPI;
+import org.rplgleparser.api.ERRC0100;
 import org.rplgleparser.api.ListApiCallback;
 
 import com.ibm.as400.access.AS400;
 import com.ibm.as400.access.AS400Message;
 import com.ibm.as400.access.AS400SecurityException;
-import com.ibm.as400.access.AS400Structure;
 import com.ibm.as400.access.AS400Text;
 import com.ibm.as400.access.ErrorCompletingRequestException;
 import com.ibm.as400.access.ObjectDoesNotExistException;
@@ -80,7 +80,7 @@ public class QUSLFLD implements ListApiCallback {
 	// Optional Parameter:
 	//
 	// 6 Error code I/O Char(*)
-	protected AS400Structure ERRC0100 = theListHandler.ERRC0100;
+	protected ERRC0100 errc0100 = new ERRC0100();
 	//
 	//
 
@@ -282,8 +282,8 @@ public class QUSLFLD implements ListApiCallback {
 					overrideProcessing.toBytes("0"));
 		}
 		parameterList[5] = new ProgramParameter(
-				ERRC0100.toBytes(theListHandler.ERRC0100j));
-		parameterList[4].setOutputDataLength(ERRC0100.getByteLength());
+				errc0100.getERRC0100x().toBytes(errc0100.getERRC0100j()));
+		parameterList[4].setOutputDataLength(errc0100.getERRC0100x().getByteLength());
 
 		pc.setProgram(programName, parameterList);
 	}
