@@ -1,5 +1,6 @@
 package org.rpgleparser.api.LFLD;
 
+import java.beans.PropertyVetoException;
 import java.util.ArrayList;
 
 import org.apache.commons.lang3.StringUtils;
@@ -17,19 +18,28 @@ public class ObjectListToArrayList extends QUSLFLD {
 	
 	public static void main(String[] args){
 		ObjectListToArrayList myobj = new ObjectListToArrayList();
-		myobj.setAs400ToConnectTo("DEV400");
-		myobj.setAs400UserName("EWILSON");
-		myobj.setFileLib("INATSTDTA");
-		myobj.setFileName("INWCTLP");
-		myobj.setRecordFormat("INWCTLR");
-		myobj.setUserSpaceLib("EWILSON");
-		myobj.setUserSpaceName("GARBAGE");
-		myobj.setDesiredFormat(FLDL0100_FORMAT);
-		myobj.setPerformOverrides(false);
-		myobj.setUserSpaceDescription("Temporary User Space");
-		myobj.setUserSpaceInitialSize(2048);
-		myobj.dowork();
-		
+		try {
+			myobj.setAs400ToConnectTo("DEV400");
+			myobj.setAs400UserName("EWILSON");
+			myobj.setFileLib("INATSTDTA");
+			myobj.setFileName("INWCTLP");
+			myobj.setRecordFormat("INWCTLR");
+			myobj.setUserSpaceLib("EWILSON");
+			myobj.setUserSpaceName("GARBAGE");
+			myobj.setDesiredFormat(FLDL0100_FORMAT);
+			myobj.setPerformOverrides(false);
+			myobj.setUserSpaceDescription("Temporary User Space");
+			myobj.setUserSpaceInitialSize(2048);
+			myobj.dowork();
+			
+			makeDDS(myobj);
+		} catch (PropertyVetoException e) {
+			e.printStackTrace();
+		}
+		System.exit(0);
+	}
+
+	private static void makeDDS(ObjectListToArrayList myobj) {
 		String sequenceNumber = "";
 		char formType = 'A';
 		String garbage = "";
@@ -77,7 +87,6 @@ public class ObjectListToArrayList extends QUSLFLD {
 			}
 			System.out.println();
 		}
-		System.exit(0);
 	}
 
 	@Override

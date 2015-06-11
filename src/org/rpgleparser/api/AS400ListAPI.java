@@ -53,7 +53,15 @@ public class AS400ListAPI implements ListApiProvider {
 		try {
 			pc.setSystem(theSystem);
 		} catch (PropertyVetoException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public AS400ListAPI(AS400 as400){
+		theSystem = as400;
+		try {
+			pc.setSystem(theSystem);
+		} catch (PropertyVetoException e) {
 			e.printStackTrace();
 		}
 	}

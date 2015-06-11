@@ -30,6 +30,31 @@ public class QUSLRCD implements ListApiCallback {
 
 	public static final String RCDL0300_FORMAT = "RCDL0300";
 
+	protected AS400 as400;
+
+	public QUSLRCD(){
+		// Default Constructor
+		this.as400 = new AS400();
+		try {
+			pc.setSystem(as400);
+			theListHandler = new AS400ListAPI(as400);
+		} catch (PropertyVetoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public QUSLRCD(AS400 as400) {
+		this.as400 = as400;
+		try {
+			pc.setSystem(as400);
+			theListHandler = new AS400ListAPI(as400);
+		} catch (PropertyVetoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	public static void main(String[] args) {
 		QUSLRCD myobj = new QUSLRCD();
 		myobj.setAs400ToConnectTo("DEV400");
@@ -102,7 +127,7 @@ theListHandler.createUserSpace(userSpaceLibrary, userSpaceName,
 		userSpaceSize, userSpaceDescription);
 }
 	
-	protected void dowork() {
+	public void dowork() {
 		try {
 			prepareConnection();
 			createUserSpace();

@@ -24,7 +24,7 @@ import com.ibm.as400.access.ProgramCall;
  *
  */
 public class LibraryList {
-	
+
 	public static void main(String[] args) {
 		LibraryList myList = new LibraryList();
 		myList.theAS400 = new AS400();
@@ -75,11 +75,13 @@ public class LibraryList {
 		}
 
 	}
+
 	private static void printWorkingLibraryList(LibraryList myList) {
 		for (String s : myList.workingLibraryList) {
 			System.out.print(s + ". ");
 		}
 	}
+
 	private ArrayList<String> previousLibraryList = new ArrayList<String>();
 	private ArrayList<String> workingLibraryList = new ArrayList<String>();
 	private Job managedJob;
@@ -182,11 +184,16 @@ public class LibraryList {
 	 * Commit the changes to the library list to the job and the previous
 	 * library list
 	 * 
-	 * @throws PropertyVetoException percolated up from IBM API
-	 * @throws InterruptedException percolated up from IBM API
-	 * @throws IOException percolated up from IBM API
-	 * @throws ErrorCompletingRequestException percolated up from IBM API
-	 * @throws AS400SecurityException percolated up from IBM API
+	 * @throws PropertyVetoException
+	 *             percolated up from IBM API
+	 * @throws InterruptedException
+	 *             percolated up from IBM API
+	 * @throws IOException
+	 *             percolated up from IBM API
+	 * @throws ErrorCompletingRequestException
+	 *             percolated up from IBM API
+	 * @throws AS400SecurityException
+	 *             percolated up from IBM API
 	 */
 	public void commit() throws PropertyVetoException, AS400SecurityException,
 			ErrorCompletingRequestException, IOException, InterruptedException {
@@ -216,14 +223,23 @@ public class LibraryList {
 		return managedJob;
 	}
 
+	public AS400 getTheAS400() {
+		return theAS400;
+	}
+
 	/**
 	 * Refreshes the internal lists from the AS400
 	 * 
-	 * @throws AS400SecurityException percolated up from IBM API
-	 * @throws ErrorCompletingRequestException percolated up from IBM API
-	 * @throws InterruptedException percolated up from IBM API
-	 * @throws IOException percolated up from IBM API
-	 * @throws ObjectDoesNotExistException percolated up from IBM API
+	 * @throws AS400SecurityException
+	 *             percolated up from IBM API
+	 * @throws ErrorCompletingRequestException
+	 *             percolated up from IBM API
+	 * @throws InterruptedException
+	 *             percolated up from IBM API
+	 * @throws IOException
+	 *             percolated up from IBM API
+	 * @throws ObjectDoesNotExistException
+	 *             percolated up from IBM API
 	 */
 	public void refreshFromServer() throws AS400SecurityException,
 			ErrorCompletingRequestException, InterruptedException, IOException,
@@ -257,15 +273,32 @@ public class LibraryList {
 		workingLibraryList.addAll(previousLibraryList);
 	}
 
+	public void setAS400(AS400 AS400) {
+		this.theAS400 = AS400;
+	}
+
+	public void setLibraryList(JobDescription jobd)
+			throws PropertyVetoException, AS400SecurityException,
+			ErrorCompletingRequestException, IOException, InterruptedException {
+		setLibraryList(Arrays.asList(jobd.getInitialLibraryList()));
+	}
+
 	/**
 	 * Sets the library list using a list of Strings.
-	 * @param desiredLibl A list of strings containing the libraries in the 
-	 * order they should be in the managed job 
-	 * @throws PropertyVetoException percolated up from IBM API
-	 * @throws AS400SecurityException percolated up from IBM API
-	 * @throws ErrorCompletingRequestException percolated up from IBM API
-	 * @throws IOException percolated up from IBM API
-	 * @throws InterruptedException percolated up from IBM API
+	 * 
+	 * @param desiredLibl
+	 *            A list of strings containing the libraries in the order they
+	 *            should be in the managed job
+	 * @throws PropertyVetoException
+	 *             percolated up from IBM API
+	 * @throws AS400SecurityException
+	 *             percolated up from IBM API
+	 * @throws ErrorCompletingRequestException
+	 *             percolated up from IBM API
+	 * @throws IOException
+	 *             percolated up from IBM API
+	 * @throws InterruptedException
+	 *             percolated up from IBM API
 	 */
 	public void setLibraryList(List<String> desiredLibl)
 			throws PropertyVetoException, AS400SecurityException,
@@ -277,14 +310,23 @@ public class LibraryList {
 	}
 
 	/**
-	 * Set the library list based on the initial library list of a given job description
-	 * @param jobDescriptionLib Library that the job description resides in
-	 * @param jobDescriptionName The name of the job description
-	 * @throws PropertyVetoException percolated up from IBM API
-	 * @throws AS400SecurityException percolated up from IBM API
-	 * @throws ErrorCompletingRequestException percolated up from IBM API
-	 * @throws IOException percolated up from IBM API
-	 * @throws InterruptedException percolated up from IBM API
+	 * Set the library list based on the initial library list of a given job
+	 * description
+	 * 
+	 * @param jobDescriptionLib
+	 *            Library that the job description resides in
+	 * @param jobDescriptionName
+	 *            The name of the job description
+	 * @throws PropertyVetoException
+	 *             percolated up from IBM API
+	 * @throws AS400SecurityException
+	 *             percolated up from IBM API
+	 * @throws ErrorCompletingRequestException
+	 *             percolated up from IBM API
+	 * @throws IOException
+	 *             percolated up from IBM API
+	 * @throws InterruptedException
+	 *             percolated up from IBM API
 	 */
 	public void setLibraryList(String jobDescriptionLib,
 			String jobDescriptionName) throws PropertyVetoException,

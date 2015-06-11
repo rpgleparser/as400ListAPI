@@ -33,17 +33,22 @@ public class QUSLFLD implements ListApiCallback {
 	
 	public static void main(String[] args) {
 		QUSLFLD myobj = new QUSLFLD();
-		myobj.setAs400ToConnectTo("DEV400");
-		myobj.setAs400UserName("EWILSON");
-		myobj.setFileLib("INATSTDTA");
-		myobj.setFileName("INWCTLP");
-		myobj.setRecordFormat("INWCTLR");
-		myobj.setUserSpaceLib("EWILSON");
-		myobj.setUserSpaceName("GARBAGE");
-		myobj.setDesiredFormat(FLDL0100_FORMAT);
-		myobj.dowork();
+		try {
+			myobj.setAs400ToConnectTo("DEV400");
+			myobj.setAs400UserName("EWILSON");
+			myobj.setFileLib("INATSTDTA");
+			myobj.setFileName("INWCTLP");
+			myobj.setRecordFormat("INWCTLR");
+			myobj.setUserSpaceLib("EWILSON");
+			myobj.setUserSpaceName("GARBAGE");
+			myobj.setDesiredFormat(FLDL0100_FORMAT);
+			myobj.dowork();
+		} catch (PropertyVetoException e) {
+			e.printStackTrace();
+		}
 		System.exit(0);
 	}
+	
 	protected AS400ListAPI theListHandler = new AS400ListAPI();
 	
 	protected String userSpaceName;
@@ -58,6 +63,7 @@ public class QUSLFLD implements ListApiCallback {
 	protected String as400UserPassword;
 	protected int userSpaceInitialSize = 1024;
 	protected String userSpaceDescription = "";
+	protected AS400 as400;
 
 	
 	// List Fields (QUSLFLD) API
@@ -86,6 +92,13 @@ public class QUSLFLD implements ListApiCallback {
 
 	protected ProgramCall pc;
 
+	public QUSLFLD(){
+		this.as400 = new AS400();
+	}
+	
+	public QUSLFLD(AS400 as400){
+		this.as400 = as400;
+	}
 	
 	protected void createUserSpace() throws AS400SecurityException,
 			ErrorCompletingRequestException, InterruptedException, IOException,
@@ -93,7 +106,7 @@ public class QUSLFLD implements ListApiCallback {
 		theListHandler.createUserSpace(userSpaceLib, userSpaceName, userSpaceInitialSize, userSpaceDescription);
 	}
 
-	protected void dowork() {
+	public void dowork() {
 		try {
 			prepareConnection();
 			registerCallback();
@@ -131,6 +144,9 @@ public class QUSLFLD implements ListApiCallback {
 		} catch (ObjectDoesNotExistException e) {
 			e.printStackTrace();
 		}
+	}
+	public AS400 getAS400() {
+		return as400;
 	}
 	/**
 	 * @return the as400ToConnectTo
@@ -238,6 +254,8 @@ public class QUSLFLD implements ListApiCallback {
 		pc = theListHandler.getPc();
 		System.out.println("Creating User Space");
 	}
+	
+	
 	protected void prepareProgramCall() throws PropertyVetoException {
 		// List Fields (QUSLFLD) API
 		//
@@ -298,22 +316,33 @@ public class QUSLFLD implements ListApiCallback {
 	protected void registerCallback() {
 		theListHandler.registerCallback(this);
 	}
+	public void setAS400(AS400 as400) {
+		this.as400 = as400;
+	}
 	/**
 	 * @param as400ToConnectTo the as400ToConnectTo to set
+	 * @throws PropertyVetoException 
 	 */
-	public void setAs400ToConnectTo(String as400ToConnectTo) {
+	public void setAs400ToConnectTo(String as400ToConnectTo) throws PropertyVetoException {
+		if (as400 == null){
+			as400 = new AS400();
+		}
+		as400.setSystemName(as400ToConnectTo);
 		this.as400ToConnectTo = as400ToConnectTo;
 	}
 	/**
 	 * @param as400UserName the as400UserName to set
+	 * @throws PropertyVetoException 
 	 */
-	public void setAs400UserName(String as400UserName) {
+	public void setAs400UserName(String as400UserName) throws PropertyVetoException {
 		this.as400UserName = as400UserName;
+		as400.setUserId(as400UserName);
 	}
 	/**
 	 * @param as400UserPassword the as400UserPassword to set
 	 */
 	public void setAs400UserPassword(String as400UserPassword) {
+		as400.setPassword(as400UserPassword);
 		this.as400UserPassword = as400UserPassword;
 	}
 	/**
@@ -364,17 +393,20 @@ public class QUSLFLD implements ListApiCallback {
 	public void setUserSpaceInitialSize(int userSpaceInitialSize) {
 		this.userSpaceInitialSize = userSpaceInitialSize;
 	}
+
 	/**
 	 * @param userSpaceLib the userSpaceLib to set
 	 */
 	public void setUserSpaceLib(String userSpaceLib) {
 		this.userSpaceLib = userSpaceLib;
 	}
+
 	/**
 	 * @param userSpaceName the userSpaceName to set
 	 */
 	public void setUserSpaceName(String userSpaceName) {
 		this.userSpaceName = userSpaceName;
 	}
+
 
 }

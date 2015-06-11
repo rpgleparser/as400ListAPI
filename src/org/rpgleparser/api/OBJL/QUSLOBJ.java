@@ -48,145 +48,69 @@ public class QUSLOBJ implements ListApiCallback {
 		myobj.dowork();
 		System.exit(0);
 	}
+	protected AS400 as400;
+	
+	protected AS400ListAPI theListHandler;
 
-	/**
-	 * @return the userSpaceLibrary
-	 */
-	public String getUserSpaceLibrary() {
-		return userSpaceLibrary;
-	}
-
-	/**
-	 * @param userSpaceLibrary
-	 *            the userSpaceLibrary to set
-	 */
-	public void setUserSpaceLibrary(String userSpaceLibrary) {
-		this.userSpaceLibrary = userSpaceLibrary;
-	}
-
-	/**
-	 * @return the userSpaceName
-	 */
-	public String getUserSpaceName() {
-		return userSpaceName;
-	}
-
-	/**
-	 * @param userSpaceName
-	 *            the userSpaceName to set
-	 */
-	public void setUserSpaceName(String userSpaceName) {
-		this.userSpaceName = userSpaceName;
-	}
-
-	/**
-	 * @return the searchObjectName
-	 */
-	public String getSearchObjectName() {
-		return searchObjectName;
-	}
-
-	/**
-	 * @param searchObjectName
-	 *            the searchObjectName to set
-	 */
-	public void setSearchObjectName(String searchObjectName) {
-		this.searchObjectName = searchObjectName;
-	}
-
-	/**
-	 * @return the searchObjectLibrary
-	 */
-	public String getSearchObjectLibrary() {
-		return searchObjectLibrary;
-	}
-
-	/**
-	 * @param searchObjectLibrary
-	 *            the searchObjectLibrary to set
-	 */
-	public void setSearchObjectLibrary(String searchObjectLibrary) {
-		this.searchObjectLibrary = searchObjectLibrary;
-	}
-
-	/**
-	 * @return the searchObjectType
-	 */
-	public String getSearchObjectType() {
-		return searchObjectType;
-	}
-
-	/**
-	 * @param searchObjectType
-	 *            the searchObjectType to set
-	 */
-	public void setSearchObjectType(String searchObjectType) {
-		this.searchObjectType = searchObjectType;
-	}
-
-	/**
-	 * @return the as400ToConnectTo
-	 */
-	public String getAs400ToConnectTo() {
-		return as400ToConnectTo;
-	}
-
-	/**
-	 * @param as400ToConnectTo
-	 *            the as400ToConnectTo to set
-	 */
-	public void setAs400ToConnectTo(String as400ToConnectTo) {
-		this.as400ToConnectTo = as400ToConnectTo;
-	}
-
-	/**
-	 * @return the as400UserName
-	 */
-	public String getAs400UserName() {
-		return as400UserName;
-	}
-
-	/**
-	 * @param as400UserName
-	 *            the as400UserName to set
-	 */
-	public void setAs400UserName(String as400UserName) {
-		this.as400UserName = as400UserName;
-	}
-
-	/**
-	 * @return the as400UserPassword
-	 */
-	public String getAs400UserPassword() {
-		return as400UserPassword;
-	}
-
-	/**
-	 * @param as400UserPassword
-	 *            the as400UserPassword to set
-	 */
-	public void setAs400UserPassword(String as400UserPassword) {
-		this.as400UserPassword = as400UserPassword;
-	}
-
-	protected AS400ListAPI theListHandler = new AS400ListAPI();
 	protected String userSpaceLibrary = "EWILSON";
+
 	protected String userSpaceName = "GARBAGE";
 
 	protected String searchObjectName = "*ALL";
+
 	protected String searchObjectLibrary = "EWILSON";
+
 	protected String searchObjectType = "*ALL";
+
 	protected String as400ToConnectTo = "DEV400";
+
 	protected String as400UserName;
+
 	protected String as400UserPassword = null;
+
 	// 5 Error Code I/O Char(*)
 	protected ERRC0100 errc0100 = new ERRC0100();
+
 	protected String desiredFormat;
+
 	protected ProgramCall pc;
+
 	protected int userSpaceSize;
+
 	protected String userSpaceDescription;
 
-	protected void dowork() {
+	public QUSLOBJ(){
+		this.as400 = new AS400();
+		try {
+			pc.setSystem(as400);
+			theListHandler = new AS400ListAPI(as400);
+		} catch (PropertyVetoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public QUSLOBJ(AS400 as400) {
+		this.as400 = as400;
+		try {
+			this.pc.setSystem(as400);
+			theListHandler = new AS400ListAPI(as400);
+		} catch (PropertyVetoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	protected void createUserSpace() throws AS400SecurityException,
+			ErrorCompletingRequestException, InterruptedException, IOException,
+			ObjectDoesNotExistException, PropertyVetoException {
+		System.out.println("Creating User Space");
+		// Create the user space
+		theListHandler.createUserSpace(userSpaceLibrary, userSpaceName,
+				userSpaceSize, userSpaceDescription);
+	}
+
+	public void dowork() {
 		try {
 			prepareConnection();
 			regsiterCallback();
@@ -228,6 +152,109 @@ public class QUSLOBJ implements ListApiCallback {
 		}
 	}
 
+	/**
+	 * @return the as400ToConnectTo
+	 */
+	public String getAs400ToConnectTo() {
+		return as400ToConnectTo;
+	}
+	/**
+	 * @return the as400UserName
+	 */
+	public String getAs400UserName() {
+		return as400UserName;
+	}
+	/**
+	 * @return the as400UserPassword
+	 */
+	public String getAs400UserPassword() {
+		return as400UserPassword;
+	}
+
+	/**
+	 * @return the desiredFormat
+	 */
+	public String getDesiredFormat() {
+		return desiredFormat;
+	}
+	/**
+	 * @return the library
+	 */
+	public String getLibrary() {
+		return userSpaceLibrary;
+	}
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return userSpaceName;
+	}
+	/**
+	 * @return the pc
+	 */
+	public ProgramCall getPc() {
+		return pc;
+	}
+	/**
+	 * @return the searchObjectLibrary
+	 */
+	public String getSearchObjectLibrary() {
+		return searchObjectLibrary;
+	}
+	/**
+	 * @return the searchObjectName
+	 */
+	public String getSearchObjectName() {
+		return searchObjectName;
+	}
+	/**
+	 * @return the searchObjectType
+	 */
+	public String getSearchObjectType() {
+		return searchObjectType;
+	}
+	/**
+	 * @return the theListHandler
+	 */
+	public AS400ListAPI getTheListHandler() {
+		return theListHandler;
+	}
+	/**
+	 * @return the userSpaceDescription
+	 */
+	public String getUserSpaceDescription() {
+		return userSpaceDescription;
+	}
+	/**
+	 * @return the userSpaceLibrary
+	 */
+	public String getUserSpaceLibrary() {
+		return userSpaceLibrary;
+	}
+	/**
+	 * @return the userSpaceName
+	 */
+	public String getUserSpaceName() {
+		return userSpaceName;
+	}
+
+	/**
+	 * @return the userSpaceSize
+	 */
+	public int getUserSpaceSize() {
+		return userSpaceSize;
+	}
+
+	protected void prepareConnection() throws PropertyVetoException {
+		AS400 theSystem = theListHandler.getTheSystem();
+		pc = theListHandler.getPc();
+		theSystem.setSystemName(as400ToConnectTo);
+		theSystem.setUserId(as400UserName);
+		if (as400UserPassword != null) {
+			theSystem.setPassword(as400UserPassword);
+		}
+	}
+
 	protected void prepareProgramCall() throws PropertyVetoException {
 		String programName = "/QSYS.LIB/QUSLOBJ.PGM";
 		AS400Text spaceName = new AS400Text(20);
@@ -249,50 +276,6 @@ public class QUSLOBJ implements ListApiCallback {
 				.getByteLength());
 
 		pc.setProgram(programName, parameterList);
-	}
-
-	protected void createUserSpace() throws AS400SecurityException,
-			ErrorCompletingRequestException, InterruptedException, IOException,
-			ObjectDoesNotExistException, PropertyVetoException {
-		System.out.println("Creating User Space");
-		// Create the user space
-		theListHandler.createUserSpace(userSpaceLibrary, userSpaceName,
-				userSpaceSize, userSpaceDescription);
-	}
-
-	protected void regsiterCallback() {
-		theListHandler.registerCallback(this);
-	}
-
-	protected void prepareConnection() throws PropertyVetoException {
-		AS400 theSystem = theListHandler.getTheSystem();
-		pc = theListHandler.getPc();
-		theSystem.setSystemName(as400ToConnectTo);
-		theSystem.setUserId(as400UserName);
-		if (as400UserPassword != null) {
-			theSystem.setPassword(as400UserPassword);
-		}
-	}
-
-	/**
-	 * @return the desiredFormat
-	 */
-	public String getDesiredFormat() {
-		return desiredFormat;
-	}
-
-	/**
-	 * @return the library
-	 */
-	public String getLibrary() {
-		return userSpaceLibrary;
-	}
-
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return userSpaceName;
 	}
 
 	public boolean processEntry(byte[] listEntry) {
@@ -318,6 +301,34 @@ public class QUSLOBJ implements ListApiCallback {
 		return true;
 	}
 
+	protected void regsiterCallback() {
+		theListHandler.registerCallback(this);
+	}
+
+	/**
+	 * @param as400ToConnectTo
+	 *            the as400ToConnectTo to set
+	 */
+	public void setAs400ToConnectTo(String as400ToConnectTo) {
+		this.as400ToConnectTo = as400ToConnectTo;
+	}
+
+	/**
+	 * @param as400UserName
+	 *            the as400UserName to set
+	 */
+	public void setAs400UserName(String as400UserName) {
+		this.as400UserName = as400UserName;
+	}
+
+	/**
+	 * @param as400UserPassword
+	 *            the as400UserPassword to set
+	 */
+	public void setAs400UserPassword(String as400UserPassword) {
+		this.as400UserPassword = as400UserPassword;
+	}
+
 	/**
 	 * @param desiredFormat
 	 *            the desiredFormat to set
@@ -327,25 +338,27 @@ public class QUSLOBJ implements ListApiCallback {
 	}
 
 	/**
-	 * @return the userSpaceSize
+	 * @param searchObjectLibrary
+	 *            the searchObjectLibrary to set
 	 */
-	public int getUserSpaceSize() {
-		return userSpaceSize;
+	public void setSearchObjectLibrary(String searchObjectLibrary) {
+		this.searchObjectLibrary = searchObjectLibrary;
 	}
 
 	/**
-	 * @param userSpaceSize
-	 *            the userSpaceSize to set
+	 * @param searchObjectName
+	 *            the searchObjectName to set
 	 */
-	public void setUserSpaceSize(int userSpaceSize) {
-		this.userSpaceSize = userSpaceSize;
+	public void setSearchObjectName(String searchObjectName) {
+		this.searchObjectName = searchObjectName;
 	}
 
 	/**
-	 * @return the userSpaceDescription
+	 * @param searchObjectType
+	 *            the searchObjectType to set
 	 */
-	public String getUserSpaceDescription() {
-		return userSpaceDescription;
+	public void setSearchObjectType(String searchObjectType) {
+		this.searchObjectType = searchObjectType;
 	}
 
 	/**
@@ -357,16 +370,26 @@ public class QUSLOBJ implements ListApiCallback {
 	}
 
 	/**
-	 * @return the theListHandler
+	 * @param userSpaceLibrary
+	 *            the userSpaceLibrary to set
 	 */
-	public AS400ListAPI getTheListHandler() {
-		return theListHandler;
+	public void setUserSpaceLibrary(String userSpaceLibrary) {
+		this.userSpaceLibrary = userSpaceLibrary;
 	}
 
 	/**
-	 * @return the pc
+	 * @param userSpaceName
+	 *            the userSpaceName to set
 	 */
-	public ProgramCall getPc() {
-		return pc;
+	public void setUserSpaceName(String userSpaceName) {
+		this.userSpaceName = userSpaceName;
+	}
+
+	/**
+	 * @param userSpaceSize
+	 *            the userSpaceSize to set
+	 */
+	public void setUserSpaceSize(int userSpaceSize) {
+		this.userSpaceSize = userSpaceSize;
 	}
 }
