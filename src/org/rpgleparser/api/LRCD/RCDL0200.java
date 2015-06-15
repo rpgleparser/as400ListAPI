@@ -193,4 +193,12 @@ public class RCDL0200 extends RCDL0100 implements IRCDL0200, RCDLoutputFormat, S
 			return false;
 		return true;
 	}
+	/* (non-Javadoc)
+	 * @see org.rpgleparser.api.LRCD.RCDL0100#getRecordFormatName()
+	 */
+	@Override
+	public String getRecordFormatName() {
+		// TODO Auto-generated method stub
+		return recordFormatName;
+	}
 }

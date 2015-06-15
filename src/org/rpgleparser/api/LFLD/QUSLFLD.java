@@ -42,6 +42,7 @@ public class QUSLFLD implements ListApiCallback {
 			myobj.setUserSpaceLib("EWILSON");
 			myobj.setUserSpaceName("GARBAGE");
 			myobj.setDesiredFormat(FLDL0100_FORMAT);
+			myobj.registerCallback();
 			myobj.dowork();
 		} catch (PropertyVetoException e) {
 			e.printStackTrace();
@@ -94,10 +95,12 @@ public class QUSLFLD implements ListApiCallback {
 
 	public QUSLFLD(){
 		this.as400 = new AS400();
+		theListHandler = new AS400ListAPI(as400);
 	}
 	
 	public QUSLFLD(AS400 as400){
 		this.as400 = as400;
+		theListHandler = new AS400ListAPI(as400);
 	}
 	
 	protected void createUserSpace() throws AS400SecurityException,
@@ -109,7 +112,6 @@ public class QUSLFLD implements ListApiCallback {
 	public void dowork() {
 		try {
 			prepareConnection();
-			registerCallback();
 			createUserSpace();
 			prepareProgramCall();
 
@@ -246,10 +248,12 @@ public class QUSLFLD implements ListApiCallback {
 	}
 	protected void prepareConnection() throws PropertyVetoException {
 		AS400 theSystem = theListHandler.getTheSystem();
-		theSystem.setSystemName(as400ToConnectTo);
-		theSystem.setUserId(as400UserName);
-		if (as400UserPassword != null){
-			theSystem.setPassword(as400UserPassword);
+		if ((! theSystem.isConnected()) && (theSystem.getUserId() == null || theSystem.getUserId().isEmpty())){
+			theSystem.setSystemName(as400ToConnectTo);
+			theSystem.setUserId(as400UserName);
+			if (as400UserPassword != null){
+				theSystem.setPassword(as400UserPassword);
+			}
 		}
 		pc = theListHandler.getPc();
 		System.out.println("Creating User Space");

@@ -45,6 +45,7 @@ public class QUSLOBJ implements ListApiCallback {
 		myobj.setSearchObjectType("*ALL");
 		myobj.setUserSpaceSize(1024);
 		myobj.setUserSpaceDescription("Some enchanted evening");
+		myobj.regsiterCallback();
 		myobj.dowork();
 		System.exit(0);
 	}
@@ -81,11 +82,13 @@ public class QUSLOBJ implements ListApiCallback {
 
 	public QUSLOBJ(){
 		this.as400 = new AS400();
+		if (pc == null){
+			pc = new ProgramCall();
+		}
 		try {
 			pc.setSystem(as400);
 			theListHandler = new AS400ListAPI(as400);
 		} catch (PropertyVetoException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -93,7 +96,12 @@ public class QUSLOBJ implements ListApiCallback {
 	public QUSLOBJ(AS400 as400) {
 		this.as400 = as400;
 		try {
-			this.pc.setSystem(as400);
+			if (pc == null){
+				pc = new ProgramCall();
+			}
+			pc.setSystem(as400);
+			this.as400ToConnectTo = as400.getSystemName();
+			this.as400UserName = as400.getUserId();
 			theListHandler = new AS400ListAPI(as400);
 		} catch (PropertyVetoException e) {
 			// TODO Auto-generated catch block
@@ -113,7 +121,6 @@ public class QUSLOBJ implements ListApiCallback {
 	public void dowork() {
 		try {
 			prepareConnection();
-			regsiterCallback();
 			createUserSpace();
 
 			// Call the list API
@@ -248,10 +255,12 @@ public class QUSLOBJ implements ListApiCallback {
 	protected void prepareConnection() throws PropertyVetoException {
 		AS400 theSystem = theListHandler.getTheSystem();
 		pc = theListHandler.getPc();
-		theSystem.setSystemName(as400ToConnectTo);
-		theSystem.setUserId(as400UserName);
-		if (as400UserPassword != null) {
-			theSystem.setPassword(as400UserPassword);
+		if ((! theSystem.isConnected()) && (theSystem.getSystemName() == null ||  theSystem.getSystemName().isEmpty())){
+			theSystem.setSystemName(as400ToConnectTo);
+			theSystem.setUserId(as400UserName);
+			if (as400UserPassword != null) {
+				theSystem.setPassword(as400UserPassword);
+			}
 		}
 	}
 
